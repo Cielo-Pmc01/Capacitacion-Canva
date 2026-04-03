@@ -1,0 +1,1449 @@
+<!doctype html>
+<html lang="es">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patagonia Booking — Capacitación</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%}
+body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
+.screen{display:none;min-height:100%;flex-direction:column}
+.screen.active{display:flex}
+
+/* LOGIN */
+#s-login{background:linear-gradient(160deg,#0f2d4a,#1a4a6e,#0a1e30);align-items:center;justify-content:center;padding:2rem}
+.lcard{background:rgba(255,255,255,.07);backdrop-filter:blur(20px);border:1px solid rgba(200,230,245,.15);border-radius:24px;padding:3rem;width:100%;max-width:400px;text-align:center}
+.lcard h1{font-family:'Playfair Display',serif;color:#fff;font-size:1.8rem;margin:.5rem 0 .25rem}
+.lcard>p{color:rgba(200,230,245,.7);font-size:.85rem;margin-bottom:2rem}
+.lcard input,.lcard select{width:100%;padding:.85rem 1rem;border-radius:10px;border:1px solid rgba(200,230,245,.2);background:rgba(255,255,255,.08);color:#fff;font-family:'DM Sans',sans-serif;font-size:.95rem;margin-bottom:1rem;outline:none}
+.lcard input::placeholder{color:rgba(200,230,245,.4)}
+.lcard select option{background:#0f2d4a}
+.btn-gold{width:100%;padding:1rem;background:linear-gradient(135deg,#e8b84b,#d4a030);color:#0f2d4a;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,184,75,.35)}
+.link-small{color:rgba(232,184,75,.8);text-decoration:none;font-size:.75rem}
+
+/* HEADER */
+.hdr{background:#0f2d4a;color:#fff;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.hdr-brand{font-family:'Playfair Display',serif;font-size:1.1rem}
+.hdr-right{display:flex;align-items:center;gap:1rem}
+.pill{background:rgba(255,255,255,.12);padding:.35rem 1rem;border-radius:20px;font-size:.8rem}
+.btn-link{background:none;border:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:.8rem;font-family:'DM Sans',sans-serif}
+
+/* ADMIN PANEL */
+.ahdr{background:#0f2d4a;color:#fff;padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(232,184,75,.2)}
+.ahdr h2{font-family:'Playfair Display',serif;font-size:1.3rem;margin:0}
+.abadge{background:rgba(232,184,75,.2);color:#e8b84b;padding:.4rem 1rem;border-radius:20px;font-size:.8rem;font-weight:600}
+.atabs{background:#fff;border-bottom:1px solid #d0e5f2;display:flex;gap:0;padding:0 2rem}
+.atab{padding:1rem 1.5rem;border-bottom:3px solid transparent;cursor:pointer;font-size:.9rem;font-weight:500;color:#5a7a91;transition:all .2s}
+.atab:hover{color:#0f2d4a}
+.atab.active{border-bottom-color:#e8b84b;color:#0f2d4a}
+.abody{padding:2rem;max-width:1200px;margin:0 auto;flex:1}
+.asec{display:none}
+.asec.active{display:block;animation:si .3s ease}
+.asec h3{color:#0f2d4a;font-size:1.1rem;font-weight:600;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between}
+.bsm{background:#e8b84b;border:none;color:#0f2d4a;padding:.4rem .8rem;border-radius:8px;font-size:.75rem;cursor:pointer;font-weight:600}
+.bsm.add{background:#0f2d4a;color:#fff}
+.bsm:hover{opacity:.85}
+.rtable{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:1rem}
+.rtable th{background:#f0f7fd;border-bottom:2px solid #0f2d4a;padding:.75rem;text-align:left;font-weight:600;color:#0f2d4a}
+.rtable td{padding:.75rem;border-bottom:1px solid #d0e5f2;color:#5a7a91}
+.rtable tr:hover{background:#f5f9fc}
+.rtable .passed{color:#2ecc71;font-weight:600}
+.rtable .failed{color:#e74c3c;font-weight:600}
+.rtable .score{font-weight:600;color:#0f2d4a}
+.agrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.acard{background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 12px rgba(15,45,74,.06);border-left:4px solid #e8b84b}
+.acard h4{color:#0f2d4a;margin-bottom:1rem;font-size:.95rem}
+.ufg{margin-bottom:1rem}
+.ufg label{display:block;font-size:.8rem;color:#0f2d4a;font-weight:600;margin-bottom:.4rem}
+.ufg input,.ufg select{width:100%;padding:.6rem;border-radius:8px;border:1px solid #d0e5f2;font-family:'DM Sans',sans-serif;font-size:.85rem}
+.ufg input:focus,.ufg select:focus{outline:none;border-color:#e8b84b;box-shadow:0 0 0 3px rgba(232,184,75,.1)}
+.uitem{padding:.6rem;background:#f5f9fc;border-radius:8px;margin-bottom:.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:#5a7a91}
+.uitem-badge{background:#0f2d4a;color:#fff;padding:.2rem .6rem;border-radius:20px;font-size:.7rem}
+
+/* DASHBOARD */
+#s-dash{background:#f5f9fc}
+.hero{background:linear-gradient(120deg,#0f2d4a,#1a4a6e);color:#fff;padding:3rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'⛰️';position:absolute;font-size:12rem;opacity:.04;right:-2rem;bottom:-2rem}
+.hero h2{font-family:'Playfair Display',serif;font-size:2.2rem;margin-bottom:.5rem}
+.hero p{opacity:.75;font-size:.95rem}
+.hero-stats{margin-top:1.5rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.8}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;padding:2rem;max-width:1100px;margin:-2rem auto 0}
+.mcard{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(15,45,74,.08);transition:all .3s;cursor:pointer;border:2px solid transparent}
+.mcard:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(15,45,74,.15);border-color:#e8b84b}
+.mcard.done{border-color:#2ecc71}
+.mbanner{height:140px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative}
+.m1 .mbanner{background:linear-gradient(135deg,#1a4a6e,#0f2d4a)}
+.m2 .mbanner{background:linear-gradient(135deg,#1e6e5a,#0d3d30)}
+.m3 .mbanner{background:linear-gradient(135deg,#6e3a1a,#3d1e0d)}
+.mbadge{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.15);color:#fff;font-size:.7rem;font-weight:600;padding:.3rem .7rem;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
+.mbadge.done{background:#2ecc71}
+.mbody{padding:1.5rem}
+.mbody h3{font-size:1.1rem;font-weight:600;margin:.5rem 0;color:#0f2d4a}
+.mbody p{font-size:.85rem;color:#5a7a91;line-height:1.5;margin-bottom:1rem}
+.mmeta{display:flex;gap:1rem;font-size:.75rem;color:#5a7a91;margin-bottom:1.2rem}
+.pbar{height:4px;background:#d0e5f2;border-radius:2px;overflow:hidden;margin-bottom:.5rem}
+.pfill{height:100%;background:linear-gradient(90deg,#e8b84b,#d4a030);border-radius:2px;transition:width .4s}
+.btn-mod{width:100%;padding:.75rem;border-radius:10px;border:none;background:#0f2d4a;color:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .2s}
+.btn-mod:hover{background:#1a4a6e}
+
+/* MODULE DETAIL */
+#s-module{background:#f5f9fc}
+.avatar-sec{background:linear-gradient(120deg,#0f2d4a,#1a4a6e);padding:2rem;display:flex;align-items:flex-start;gap:1.5rem;color:#fff}
+.av-wrap{position:relative;flex-shrink:0}
+.av-face{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#4a9fd5,#2a7ab0);display:flex;align-items:center;justify-content:center;font-size:3rem;border:3px solid rgba(255,255,255,.3)}
+.av-face.speaking::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:3px solid #e8b84b;animation:pr 1.2s infinite}
+@keyframes pr{0%{transform:scale(.95);opacity:1}70%,100%{transform:scale(1.1);opacity:0}}
+.av-dot{position:absolute;bottom:3px;right:3px;width:18px;height:18px;background:#2ecc71;border-radius:50%;border:2px solid #0f2d4a}
+.bubble{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px 16px 16px 4px;padding:1rem 1.2rem;flex:1;font-size:.95rem;line-height:1.6;min-height:70px}
+.bubble.typing .btext{display:none}
+.bubble.typing .bdots{display:flex;gap:4px;align-items:center}
+.bdots{display:none}
+.bdots span{width:8px;height:8px;background:rgba(255,255,255,.6);border-radius:50%;animation:bn 1s infinite}
+.bdots span:nth-child(2){animation-delay:.2s}
+.bdots span:nth-child(3){animation-delay:.4s}
+@keyframes bn{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+.av-controls{display:flex;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.btn-av{padding:.4rem .9rem;border-radius:20px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:.8rem;cursor:pointer}
+.btn-av:hover{background:rgba(255,255,255,.2)}
+.btn-av.gold{background:#e8b84b;color:#0f2d4a;border-color:#e8b84b;font-weight:600}
+.content-area{padding:2rem;flex:1;max-width:900px;width:100%;margin:0 auto}
+.tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.tab{padding:.45rem 1rem;border-radius:20px;border:1px solid #d0e5f2;background:#fff;font-size:.8rem;color:#5a7a91;cursor:pointer;transition:all .2s}
+.tab.active{background:#0f2d4a;color:#fff;border-color:#0f2d4a}
+.tc{display:none}
+.tc.active{display:block}
+.scard{background:#fff;border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 2px 12px rgba(15,45,74,.06);border-left:4px solid #e8b84b;animation:si .4s ease}
+@keyframes si{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.scard h3{color:#0f2d4a;font-size:1rem;font-weight:600;margin-bottom:.75rem}
+.scard p,.scard li{color:#5a7a91;font-size:.9rem;line-height:1.65}
+.scard ul{padding-left:1.2rem}
+.scard li{margin-bottom:.4rem}
+.step-list{list-style:none;padding:0}
+.step-list li{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid #d0e5f2}
+.step-list li:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.snum{width:28px;height:28px;border-radius:50%;background:#0f2d4a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0}
+.alert{background:#fff8e6;border:1px solid #f0d080;border-radius:10px;padding:.9rem 1rem;font-size:.85rem;color:#7a5a00;display:flex;gap:.5rem;margin-top:.75rem}
+.nfooter{background:#fff;border-top:1px solid #d0e5f2;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;bottom:0}
+.btn-n{padding:.75rem 1.5rem;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:600;cursor:pointer;font-size:.9rem;transition:all .2s;border:2px solid #0f2d4a}
+.btn-n.solid{background:#0f2d4a;color:#fff}
+.btn-n.out{background:transparent;color:#0f2d4a}
+.btn-n.gold{background:#e8b84b;border-color:#e8b84b;color:#0f2d4a}
+.btn-n:hover{opacity:.85}
+.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.ecard{background:#f5f9fc;border-radius:12px;padding:1rem;border:1px solid #d0e5f2}
+.ecard h4{color:#0f2d4a;font-size:.85rem;margin-bottom:.4rem;font-weight:600}
+.ecard .eprice{font-size:1rem;font-weight:700;color:#0d1f2d}
+.ecard .eprice2{font-size:.8rem;color:#5a7a91}
+.ecard .etag{font-size:.75rem;color:#5a7a91;margin-bottom:.4rem}
+.inc-list{list-style:none;padding:0}
+.inc-list li{padding:.4rem 0;border-bottom:1px solid #d0e5f2;font-size:.85rem;color:#5a7a91;display:flex;gap:.5rem}
+.inc-list li:last-child{border-bottom:none}
+
+/* GAME */
+#game-excursiones{padding:.5rem 0}
+.game-title{font-family:'Playfair Display',serif;color:#0f2d4a;font-size:1.3rem;margin-bottom:.5rem}
+.game-sub{color:#5a7a91;font-size:.85rem;margin-bottom:1.5rem;line-height:1.5}
+.game-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:1.5rem}
+.game-col{background:#f5f9fc;border-radius:14px;padding:1rem;border:2px dashed #d0e5f2;min-height:180px;transition:border-color .2s}
+.game-col.over{border-color:#e8b84b;background:#fffbe8}
+.game-col.correct-col{border-color:#2ecc71;background:#eafaf3}
+.game-col h4{font-size:.8rem;font-weight:700;color:#0f2d4a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem;text-align:center}
+.game-pool{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem;min-height:50px;padding:.75rem;background:#fff;border-radius:12px;border:2px dashed #d0e5f2}
+.game-chip{padding:.4rem .9rem;border-radius:20px;background:#0f2d4a;color:#fff;font-size:.8rem;cursor:grab;user-select:none;transition:all .2s;display:inline-block;border:2px solid transparent}
+.game-chip:active{cursor:grabbing;transform:scale(1.05)}
+.game-chip.placed{background:#1a4a6e}
+.game-chip.correct{background:#2ecc71;border-color:#1aaa55}
+.game-chip.wrong{background:#e74c3c;border-color:#c0392b}
+.game-score{background:linear-gradient(120deg,#0f2d4a,#1a4a6e);color:#fff;border-radius:16px;padding:1.5rem;text-align:center;margin-top:1rem}
+.game-score h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:.5rem}
+.game-score p{opacity:.8;font-size:.9rem}
+.btn-game{padding:.75rem 1.5rem;border-radius:10px;border:none;background:#e8b84b;color:#0f2d4a;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;margin-top:1rem;transition:all .2s}
+.btn-game:hover{transform:translateY(-1px)}
+@media(max-width:600px){.game-board{grid-template-columns:1fr 1fr}}
+
+/* ADMIN LOGIN */
+.alform{background:#fff;border-radius:16px;padding:2rem;max-width:400px;margin:3rem auto;box-shadow:0 4px 20px rgba(15,45,74,.1);text-align:center}
+.alform h3{color:#0f2d4a;margin-bottom:.5rem}
+.alform p{color:#5a7a91;font-size:.85rem;margin-bottom:1.5rem}
+.alform input{width:100%;padding:.85rem 1rem;border-radius:10px;border:2px solid #d0e5f2;font-family:'DM Sans',sans-serif;font-size:.95rem;margin-bottom:1rem;outline:none;transition:border-color .2s}
+.alform input:focus{border-color:#0f2d4a}
+
+/* QUIZ */
+#s-quiz{background:#f5f9fc}
+.qhdr{background:#0f2d4a;color:#fff;padding:1.5rem 2rem}
+.qhdr h2{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:.5rem}
+.qpbar{height:6px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden;margin-top:.75rem}
+.qpfill{height:100%;background:#e8b84b;border-radius:3px;transition:width .4s}
+.qmeta{font-size:.8rem;opacity:.7;margin-top:.25rem}
+.qbody{padding:2rem;max-width:700px;margin:0 auto;flex:1}
+.qcard{background:#fff;border-radius:16px;padding:2rem;box-shadow:0 4px 20px rgba(15,45,74,.08);margin-bottom:1.5rem;animation:si .3s ease}
+.qnum{font-size:.75rem;color:#5a7a91;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
+.qtext{font-size:1.05rem;font-weight:500;color:#0f2d4a;line-height:1.5;margin-bottom:1.5rem}
+.opts{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.obtn{display:flex;align-items:center;gap:1rem;padding:.9rem 1.2rem;border-radius:12px;border:2px solid #d0e5f2;background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.9rem;color:#0d1f2d;text-align:left;transition:all .2s;width:100%}
+.obtn:hover{border-color:#0f2d4a;background:#f0f7fd}
+.obtn.sel{border-color:#0f2d4a;background:#e8f2fa}
+.obtn.correct{border-color:#2ecc71;background:#eafaf3;color:#1a6b40}
+.obtn.wrong{border-color:#e74c3c;background:#fdeaea;color:#8b1a1a}
+.oletter{width:28px;height:28px;border-radius:50%;background:#d0e5f2;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0;transition:all .2s}
+.obtn.sel .oletter{background:#0f2d4a;color:#fff}
+.obtn.correct .oletter{background:#2ecc71;color:#fff}
+.obtn.wrong .oletter{background:#e74c3c;color:#fff}
+.qnav{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.skip-hint{font-size:.8rem;color:#5a7a91}
+
+/* RESULTS */
+#s-result{background:#f5f9fc;align-items:center;justify-content:center;padding:2rem}
+.rcard{background:#fff;border-radius:20px;padding:2.5rem;max-width:500px;width:100%;box-shadow:0 8px 32px rgba(15,45,74,.1);text-align:center}
+.rcard h2{font-family:'Playfair Display',serif;font-size:1.6rem;color:#0f2d4a;margin:.5rem 0}
+.rcard p{color:#5a7a91;font-size:.9rem;line-height:1.6;margin-bottom:1.5rem}
+.rmsg{background:linear-gradient(120deg,#e8f7f0,#d0f0e4);border-radius:12px;padding:1.2rem;margin:1.5rem 0;color:#1a5e3a;font-size:.9rem;line-height:1.6}
+
+/* CERTIFICATE */
+#s-cert{background:linear-gradient(160deg,#0f2d4a,#1a4a6e);align-items:center;justify-content:center;padding:2rem}
+.cert{background:#fff;border-radius:24px;padding:3rem;max-width:600px;width:100%;text-align:center;position:relative;overflow:hidden}
+.cert::before{content:'';position:absolute;inset:8px;border:2px solid #e8b84b;border-radius:18px;pointer-events:none}
+.cert-icon{font-size:3rem;margin-bottom:1rem}
+.cert h2{font-family:'Playfair Display',serif;color:#0f2d4a;font-size:1.6rem;margin-bottom:.3rem}
+.cert .cert-sub{color:#5a7a91;font-size:.85rem;margin-bottom:1.5rem}
+.cert .cert-name{font-family:'Playfair Display',serif;font-size:1.8rem;color:#0f2d4a;margin:1rem 0;padding:.5rem 0;border-bottom:2px solid #e8b84b;border-top:2px solid #e8b84b;display:inline-block}
+.cert .cert-detail{color:#5a7a91;font-size:.88rem;margin:.5rem 0}
+.cert .cert-date{color:#5a7a91;font-size:.8rem;margin-top:1.5rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:#0f2d4a;color:#fff;padding:1rem 2rem;border-radius:12px;font-size:.9rem;z-index:999;transition:transform .4s;display:flex;align-items:center;gap:.5rem}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.success{background:#2ecc71}
+
+@media(max-width:600px){
+  .hero h2{font-size:1.6rem}
+  .mgrid{grid-template-columns:1fr;padding:1rem}
+  .lcard{padding:2rem 1.5rem}
+  .hero-stats{flex-direction:column;gap:.5rem}
+}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body><!-- LOGIN -->
+  <div id="s-login" class="screen active">
+   <div class="lcard">
+    <div style="font-size:2.5rem;margin-bottom:.5rem">
+     ⛰️
+    </div>
+    <h1 id="main-title">Patagonia Booking</h1>
+    <p>Plataforma de Capacitación</p>
+    <form id="loginForm"><input type="text" id="loginUser" placeholder="Usuario" required> <input type="password" id="loginPass" placeholder="Contraseña" required> <button type="submit" class="btn-gold">Ingresar a capacitación</button>
+    </form><br><a href="#" class="link-small" onclick="showScreen('s-admin-login'); return false;">¿Sos administrador? Ingresá aquí</a>
+   </div>
+  </div><!-- ADMIN LOGIN -->
+  <div id="s-admin-login" class="screen">
+   <div style="display:flex;align-items:center;justify-content:center;min-height:100%;background:linear-gradient(160deg,#0f2d4a,#1a4a6e,#0a1e30);padding:2rem">
+    <div class="alform">
+     <div style="font-size:2.5rem;margin-bottom:1rem">
+      🔐
+     </div>
+     <h3 style="color:#0f2d4a">Acceso Administrativo</h3>
+     <p style="color:#5a7a91">Portal de gestión y reportes</p><input type="text" id="adUsername" placeholder="Usuario administrador"> <input type="password" id="adPassword" placeholder="Contraseña"> <button class="btn-gold" style="width:100%" onclick="doAdminLogin()">Ingresar →</button> <button class="btn-link" style="margin-top:1rem;width:100%;padding:.5rem" onclick="showScreen('s-login')">← Volver a capacitación</button>
+    </div>
+   </div>
+  </div><!-- ADMIN PANEL -->
+  <div id="s-admin" class="screen">
+   <div class="ahdr">
+    <div>
+     <h2 id="atitle">Panel de Administración</h2>
+     <div style="font-size:.8rem;opacity:.6;margin-top:.2rem" id="asubtitle">
+      Resultados y gestión de accesos
+     </div>
+    </div>
+    <div style="display:flex;gap:1rem;align-items:center">
+     <span class="abadge" id="abadge">🔐 Admin</span> <button class="btn-link" onclick="logout()">Salir</button>
+    </div>
+   </div>
+   <div class="atabs" id="atabs">
+    <div class="atab active" onclick="switchAtab('results',this)">
+     📊 Resultados
+    </div>
+    <div class="atab" id="tab-acc" onclick="switchAtab('accesos',this)">
+     👥 Accesos
+    </div>
+   </div>
+   <div class="abody">
+    <div class="asec active" id="sec-results">
+     <h3>📊 Resultados <button class="bsm" onclick="clearRes()">🗑 Limpiar</button></h3>
+     <div id="notion-status-bar" style="margin-bottom:1rem;padding:.75rem 1rem;border-radius:10px;font-size:.85rem;display:flex;align-items:center;gap:.75rem"></div>
+     <table class="rtable">
+      <thead>
+       <tr>
+        <th>Nombre</th>
+        <th>Usuario</th>
+        <th>Módulo</th>
+        <th>Fecha</th>
+        <th>Correctas</th>
+        <th>%</th>
+        <th>Estado</th>
+       </tr>
+      </thead>
+      <tbody id="rtbody"></tbody>
+     </table>
+    </div>
+    <div class="asec" id="sec-accesos">
+     <h3>👥 Gestión de Accesos</h3>
+     <div class="agrid">
+      <div class="acard">
+       <h4>👤 Usuarios activos</h4>
+       <div id="ulist"></div>
+       <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #d0e5f2">
+        <label style="display:block;font-size:.8rem;color:#0f2d4a;font-weight:600;margin-bottom:.5rem">🗑 Borrar progreso de usuario</label> <select id="delUser" style="width:100%;padding:.6rem;border-radius:8px;border:1px solid #d0e5f2;font-family:'DM Sans',sans-serif;font-size:.85rem;margin-bottom:.5rem"> <option value="">Seleccionar usuario...</option> </select> <button class="bsm" style="width:100%;background:#e74c3c;color:#fff" onclick="deleteUserProgress()">🗑 Borrar progreso</button>
+       </div>
+      </div>
+      <div class="acard">
+       <h4>➕ Agregar usuario</h4>
+       <div class="ufg"><label>Nombre completo</label><input type="text" id="nn" placeholder="María García">
+       </div>
+       <div class="ufg"><label>Usuario (login)</label><input type="text" id="nu" placeholder="maria.garcia">
+       </div>
+       <div class="ufg"><label>Contraseña</label><input type="password" id="np" placeholder="Mínimo 4 caracteres">
+       </div>
+       <div class="ufg"><label>Rol</label> <select id="nr"><option value="vendedor">Vendedor/a</option><option value="sp">SP — Supervisor</option></select>
+       </div>
+       <div class="ufg"><label>Oficina</label> <select id="no"><option value="TB1">Turismo Bariloche — Mitre 83</option><option value="TB2">Turismo Bariloche — Mitre 332</option><option value="PB">Patagonia Booking — Mitre 131</option><option value="TP">Turismo Patagonia — Mitre 415</option><option value="B1">Bunker / Virtual</option></select>
+       </div>
+       <div class="ufg"><label>Email</label><input type="email" id="ne" placeholder="usuario@pb.com">
+       </div><button class="bsm add" onclick="addUser()" style="width:100%;padding:.6rem">Agregar usuario</button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="s-dash" class="screen">
+   <header class="hdr"><span class="hdr-brand" id="hdr-title">⛰️ Patagonia Booking</span>
+    <div class="hdr-right"><span class="pill" id="userPill">Agente</span> <button class="btn-link" onclick="logout()">Salir</button>
+    </div>
+   </header>
+   <div class="hero">
+    <h2>¡Bienvenido/a al programa!</h2>
+    <p>Completá los 3 módulos para certificarte como vendedor/a de Patagonia Booking</p>
+    <div class="hero-stats">
+     <span>📚 3 Módulos</span><span>⏱ 2 hs c/u</span><span>✅ 20 preguntas</span>
+    </div>
+   </div>
+   <div class="mgrid" id="modGrid"></div>
+   <div style="height:2rem"></div>
+  </div><!-- MODULE DETAIL -->
+  <div id="s-module" class="screen">
+   <header class="hdr"><span class="hdr-brand" id="hdr-title2">⛰️ Patagonia Booking</span>
+    <div class="hdr-right"><span class="pill" id="userPill2">Agente</span> <button class="btn-link" onclick="logout()">Salir</button>
+    </div>
+   </header>
+   <div class="avatar-sec">
+    <div class="av-wrap">
+     <div class="av-face" id="avface">
+      🧑‍💼
+     </div>
+     <div class="av-dot"></div>
+    </div>
+    <div style="flex:1">
+     <div style="font-size:.8rem;opacity:.6;margin-bottom:.3rem">
+      Sofía — Tutora de capacitación
+     </div>
+     <div class="bubble" id="bubble">
+      <div class="btext" id="btext">
+       ¡Hola! Soy Sofía. Navegá las pestañas y cuando estés listo, hacé el quiz.
+      </div>
+      <div class="bdots"><span></span><span></span><span></span>
+      </div>
+     </div>
+     <div class="av-controls">
+      <button class="btn-av" onclick="speakAv()">🔊 Escuchar</button> <button class="btn-av" onclick="stopAv()">⏹ Parar</button> <button class="btn-av gold" onclick="startQuizSession()">📝 Ir al Quiz →</button>
+     </div>
+    </div>
+   </div>
+   <div class="content-area">
+    <div class="tabs" id="modtabs"></div>
+    <div id="modcontent"></div>
+   </div>
+   <div class="nfooter">
+    <button class="btn-n out" onclick="showScreen('s-dash')">← Dashboard</button> <button class="btn-n gold" onclick="startQuizSession()">Hacer el Quiz →</button>
+   </div>
+  </div><!-- QUIZ -->
+  <div id="s-quiz" class="screen">
+   <div class="qhdr">
+    <h2 id="qtitle">Evaluación — Módulo 1</h2>
+    <div class="qmeta" id="qmeta">
+     Pregunta 1 de 20
+    </div>
+    <div class="qpbar">
+     <div class="qpfill" id="qpf" style="width:5%"></div>
+    </div>
+   </div>
+   <div class="qbody">
+    <div class="qcard">
+     <div class="qnum" id="qnum">
+      Pregunta 1 de 20
+     </div>
+     <div class="qtext" id="qtext"></div>
+     <ul class="opts" id="opts"></ul>
+    </div>
+    <div class="qnav"><span class="skip-hint" id="shint">Podés omitir y volver después</span>
+     <div style="display:flex;gap:.75rem"><button class="btn-n out" id="bskip" onclick="skipQ()" style="display:none">Omitir →</button> <button class="btn-n solid" id="bnext" onclick="nextQ()" style="display:none">Siguiente →</button> <button class="btn-n gold" id="bfin" onclick="finishQuiz()" style="display:none">Finalizar ✓</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- RESULT -->
+  <div id="s-result" class="screen">
+   <div class="rcard">
+    <div style="font-size:5rem" id="r-emoji">
+     🎉
+    </div>
+    <h2 id="r-title">¡Felicitaciones!</h2>
+    <h3 id="r-subtitle" style="font-family:'Playfair Display',serif;color:#e8b84b;font-size:1.3rem;margin:.5rem 0 1rem"></h3>
+    <p id="r-msg">Tus resultados fueron registrados y serán revisados por tu supervisor de manera interna.</p>
+    <div class="rmsg" id="r-next"></div><button class="btn-n solid" onclick="showScreen('s-dash')" style="width:100%;margin-top:.5rem">← Volver al inicio</button>
+   </div>
+  </div><!-- CERTIFICATE -->
+  <div id="s-cert" class="screen">
+   <div class="cert">
+    <div class="cert-icon">
+     🏔️
+    </div>
+    <h2>Certificado de Capacitación</h2>
+    <p class="cert-sub">Patagonia Booking — Programa de formación</p>
+    <div class="cert-name" id="certName">
+     —
+    </div>
+    <p class="cert-detail">Ha completado satisfactoriamente todos los módulos de capacitación</p>
+    <p class="cert-detail" id="certScore">Puntuación promedio: —</p>
+    <p class="cert-date" id="certDate">—</p><br><button class="btn-gold" style="max-width:250px;margin:0 auto" onclick="showScreen('s-dash')">Volver al inicio</button>
+   </div>
+  </div><!-- TOAST -->
+  <div class="toast" id="toast"></div>
+  <script>
+// ============ DATA ============
+const modules = [
+  {
+    id:1, icon:'💻', title:'Herramientas Digitales & Protocolo', desc:'WhatsApp Business, protocolo diario, Chatwoot e IA Magda. Claves para cerrar ventas online.',
+    color:'m1', lessons:[
+      {id:1,title:'WhatsApp Business y Protocolo',dur:'5 min',content:'<p>WhatsApp Business es nuestra herramienta principal de comunicación:</p><ul><li>Respuesta en máximo 2 horas a consultas de clientes</li><li>Usar saludo estándar: "¡Hola! Bienvenido a Patagonia Booking 🏔️"</li><li>Mantener tono profesional pero cálido</li><li>Usar plantillas para respuestas frecuentes</li><li>Revisar catalogo y disponibilidad antes de responder</li></ul><p>Protocolo: Contacto → Consulta → Propuesta → Confirmación → Follow-up.</p>'},
+      {id:2,title:'Herramientas: Chatwoot y IA Magda',dur:'4 min',content:'<p>Chatwoot centraliza todas nuestras conversaciones:</p><ul><li>Asigna tickets automáticamente por equipo</li><li>Permite colaboración en tiempo real</li><li>IA Magda sugiere respuestas y siguientes pasos</li><li>Registra historial completo del cliente</li></ul><p>Cómo usar IA Magda: Escribe "/" y selecciona la sugerencia apropiada. Siempre revisa antes de enviar.</p>'},
+      {id:3,title:'Cierre de ventas online',dur:'3 min',content:'<p>Estrategia probada para cerrar ventas sin presión:</p><ul><li>Identificar necesidades: fechas, presupuesto, tipo de actividad</li><li>Ofertar paquetes personalizados (3 opciones: básica, standard, premium)</li><li>Usar testimonios: "Otro cliente en marzo amó esta excursión"</li><li>Crear urgencia suave: "Quedan 2 disponibilidades para esa fecha"</li><li>Cierre: "¿Confirmo tu reserva?" (sí/no simple)</li></ul><p>Recuerda: escucha primero, luego presenta soluciones.</p>'},
+      {id:4,title:'El celular: tu herramienta principal',dur:'5 min',content:'<div class="scard"><h3>📱 El celular: tu herramienta principal</h3><p>El equipo de Ventas Online debe tener presente que el teléfono celular es la herramienta principal de trabajo. De su correcto funcionamiento depende la comunicación con los clientes, el seguimiento de reservas y el rendimiento comercial diario.</p><p style="margin-top:.75rem">Cada integrante es responsable de cuidar, mantener operativo y en condiciones el dispositivo asignado, asegurando que WhatsApp funcione correctamente, con buena conexión, sonido y batería suficiente para toda la jornada.</p></div><div class="scard"><h3>✅ Pasos de ingreso diario</h3><ul class="step-list"><li><span class="snum">1</span><div><strong>Verificar que el celular esté encendido y operativo</strong><br><span style="color:#5a7a91;font-size:.85rem">Batería mínimo 80%, sonido y notificaciones activados.</span></div></li><li><span class="snum">2</span><div><strong>Controlar la conexión</strong><br><span style="color:#5a7a91;font-size:.85rem">Wi-Fi o datos móviles estables.</span></div></li><li><span class="snum">3</span><div><strong>Abrir WhatsApp Business</strong><br><span style="color:#5a7a91;font-size:.85rem">Verificar que las conversaciones estén visibles y sincronizadas. Comprobar envío y recepción de mensajes.</span></div></li><li><span class="snum">4</span><div><strong>Enviar ✅ a SP 005 Yamila</strong><br><span style="color:#5a7a91;font-size:.85rem">Número: +. . Confirma que el dispositivo está operativo y listo para comenzar.</span></div></li></ul><div class="alert">⚠️ Ningún agente puede iniciar tareas sin haber realizado el check de control diario.</div></div><div class="scard"><h3>🔧 Fallas y fin de jornada</h3><p>Si el celular presenta fallas (batería, conexión, WhatsApp o sonido): <strong>reportar inmediatamente al supervisor</strong> antes de iniciar tareas. Al finalizar el día, guardar el equipo en el espacio asignado y conectarlo a carga.</p></div>'},
+      {id:5,title:'Chatwoot: gestión centralizada',dur:'6 min',content:'<div class="scard"><h3>🧭 ¿Qué es Chatwoot?</h3><p>Chatwoot (CW) centraliza todos los canales digitales de la empresa: WhatsApp, perfiles sociales y más. Los vendedores no gestionan múltiples dispositivos, sino que usan CW para visualizar todos los mensajes entrantes en un solo lugar.</p></div><div class="scard"><h3>🤖 La IA Magda</h3><p>Magda está configurada para responder automáticamente todas las consultas entrantes, garantizando atención inmediata. <strong>No realiza cierres de venta ni toma decisiones comerciales.</strong></p><p style="margin-top:.75rem">Es válido y necesario dejar que Magda trabaje hasta que la consulta se acerque a una instancia de cierre, momento en que la intervención humana se vuelve necesaria.</p></div><div class="scard"><h3>⏱ Regla de los 3 minutos</h3><ul class="step-list"><li><span class="snum">1</span><div>El vendedor <strong>se asigna</strong> la conversación</div></li><li><span class="snum">2</span><div>Pausa a Magda con el botón <strong>"Human Response"</strong></div></li><li><span class="snum">3</span><div>Desde ese momento tiene <strong>3 minutos para responder</strong> al cliente</div></li><li><span class="snum">4</span><div>Si no se envía un mensaje en ese plazo, <strong>otro vendedor puede tomar la conversación</strong></div></li></ul><div class="alert">⚠️ Asignarse una conversación implica compromiso de respuesta inmediata.</div></div><div class="scard"><h3>🗃 Organización en CW</h3><p><strong>Bandejas:</strong> "Mías", "Sin asignar" y "Todos". El sistema no asigna automáticamente: cada vendedor debe asignarse manualmente la conversación. Es fundamental autoasignarse las conversaciones desatendidas.</p><p style="margin-top:.75rem"><strong>Herramientas internas:</strong> Nota privada (comentarios del equipo) · Prioridad (casos urgentes) · Etiquetas (tipo de actividad o marca). Para reportar errores a Yamila: etiqueta "Desarrollo" y nombrarla como SP 005 Yamila.</p></div>'},
+      {id:6,title:'Conversión online: técnicas y herramientas',dur:'5 min',content:'<div class="scard"><h3>🎯 Claves para la conversión online</h3><ul class="inc-list"><li>✅ <strong>Comunicación clara y empática</strong> — Sé amable, directo y resolutivo</li><li>🎙 <strong>Audios con voz cálida</strong> — No superar 30 segundos, buena dicción y tono profesional</li><li>❓ <strong>Preguntas clave</strong> — "¿Qué tipo de experiencia buscás?", "¿Cuántos días vas a estar?", "¿Viajás con niños?"</li><li>⚡ <strong>Respuestas rápidas</strong> — No dejes al cliente esperando. Si no podés cerrar, agendá y retomá</li><li>📸 <strong>Recursos visuales</strong> — Foto del producto, video corto o flyer de la actividad</li></ul></div><div class="scard"><h3>💬 Llamados a la acción</h3><p>Terminá siempre con una pregunta o propuesta concreta:</p><div style="background:#f0f7fd;border-radius:8px;padding:1rem;margin-top:.75rem;font-style:italic;color:#0f2d4a;font-size:.9rem;line-height:1.8">"¿Te reservo ya y te paso los medios de pago?"<br>"¿Querés que te arme un combo con esta y otra excursión?"</div></div><div class="scard"><h3>🛠 Herramientas de fidelización</h3><ul class="inc-list"><li>🎙 <strong>Audios</strong> — Máx. 30 seg, info clara, amena y segura</li><li>📹 <strong>Videollamadas</strong> — Para generar empatía o aclarar dudas de último momento</li><li>🏷 <strong>Notas en CW</strong> — Etiquetar prospecto como "Interesado" o "Esperando pago"</li></ul></div><div class="scard"><h3>📱 Gestión de reservas y contactos</h3><p>Desde CW podés crear el grupo de WhatsApp con el pax, agendado por <strong>apellido</strong> e incluyendo cantidad de pasajeros. Para cargar datos del pasajero: tres puntos del chat → "Añadir contacto" (nombre, teléfono, email).</p></div>'}
+    ],
+    quiz:[
+      {q:"¿Cuál es la herramienta principal del equipo de Ventas Online?",opts:["La computadora","El teléfono celular","El sistema web","La impresora"],correct:1},
+      {q:"¿Cuál es el porcentaje mínimo de batería requerido al inicio de jornada?",opts:["50%","60%","70%","80%"],correct:3},
+      {q:"¿A quién se envía el ✅ de confirmación de operatividad diaria?",opts:["SP007 Rocio","SP004 Cecilia","SP005 Yamila","SP002 Magali"],correct:2},
+      {q:"¿Qué hace el botón 'Human Response' en Chatwoot?",opts:["Pone en espera al cliente","Pausa la IA Magda","Envía un mensaje automático","Cierra la conversación"],correct:1},
+      {q:"¿Cuánto tiempo tiene el vendedor para responder tras asignarse una conversación?",opts:["5 minutos","10 minutos","3 minutos","1 minuto"],correct:2},
+      {q:"¿Qué bandeja de CW muestra las conversaciones sin atender?",opts:["Mías","Todos","Sin asignar","Pendientes"],correct:2},
+      {q:"¿Qué etiqueta se usa para reportar errores técnicos a Yamila?",opts:["Error","Técnico","Desarrollo","Bug"],correct:2},
+      {q:"¿Cuánto deben durar máximo los audios de venta?",opts:["1 minuto","30 segundos","2 minutos","15 segundos"],correct:1},
+      {q:"¿Puede la IA Magda realizar cierres de venta?",opts:["Sí, siempre","Solo ventas menores a $10.000","No, nunca","Solo con autorización del SP"],correct:2},
+      {q:"¿Cómo se agenda al pasajero en el grupo de WhatsApp de CW?",opts:["Por nombre","Por DNI","Por apellido","Por número de reserva"],correct:2},
+      {q:"Si el celular presenta fallas, ¿qué debe hacer el vendedor?",opts:["Esperar al final del día","Reportar inmediatamente al supervisor","Reiniciar y continuar","Usar su celular personal"],correct:1},
+      {q:"Si no se responde en el plazo, ¿qué puede hacer otro vendedor?",opts:["Nada, debe esperar","Asignarse la conversación y continuar","Escalar al supervisor","Cerrar el chat"],correct:1},
+      {q:"¿Magda responde si detecta intervención humana directa?",opts:["Sí, siempre","No, solo responde si NO detecta intervención humana","Solo si el vendedor lo indica","Solo de noche"],correct:1},
+      {q:"¿Cuál es el objetivo del sistema de 3 minutos?",opts:["Aumentar ventas","Evitar que el cliente quede desatendido","Reducir costos operativos","Eliminar el uso de IA"],correct:1},
+      {q:"¿Qué debe hacer el vendedor al final del día con el celular?",opts:["Llevarlo a casa","Guardarlo y conectarlo a carga","Dejarlo apagado en el escritorio","Entregarlo al supervisor"],correct:1},
+      {q:"¿Qué herramienta de CW permite dejar comentarios solo visibles para el equipo?",opts:["Etiqueta","Nota privada","Prioridad","Alerta"],correct:1},
+      {q:"¿Cuál es una 'pregunta clave' para guiar una venta?",opts:["¿Tenés experiencia con excursiones?","¿Sabés cómo funciona el sistema?","¿Qué tipo de experiencia estás buscando?","¿Ya conocés Bariloche?"],correct:2},
+      {q:"¿Qué indica la herramienta 'Prioridad' en Chatwoot?",opts:["Conversación cerrada","Casos urgentes o con seguimiento especial","Cliente VIP","IA activa"],correct:1},
+      {q:"Si no podés cerrar la venta en el momento, ¿qué hacés?",opts:["Decirle que llame mañana","Dejar agendada la conversación y retomar con seguimiento","Pasarla a otro vendedor","Cerrar el chat y esperar"],correct:1},
+      {q:"¿Cuál es el tiempo máximo de respuesta en WhatsApp?",opts:["1 hora","2 horas","4 horas","24 horas"],correct:1}
+    ]
+  },
+  {
+    id:2, icon:'🗺️', title:'Módulo 2 — Excursiones & Producto', desc:'¡Módulo 2! Acá vas a conocer todo el catálogo de excursiones: las de todo el año, invierno, lacustres y aventura. Saber los precios y qué incluye cada servicio es tu principal herramienta de venta.',
+    color:'m2', lessons:[
+      {id:7,title:'Catálogo de Excursiones',dur:'5 min',content:'<p>Nuestro catálogo incluye más de 30 excursiones:</p><ul><li><strong>Aventura (Trekking):</strong> $1.500-2.500 • Nivel físico: Medio-Alto</li><li><strong>Lacustres (Navegación):</strong> $1.200-1.800 • Apto todos</li><li><strong>Invierno:</strong> $2.000-3.500 • Experiencia recomendada</li><li><strong>Fauna (Avistaje):</strong> $1.800-2.200 • Familia friendly</li><li><strong>Cabalgata:</strong> $1.500 • Apto desde 8 años</li></ul><p>Consulta siempre el nivel físico y contraindicaciones con el cliente.</p>'},
+      {id:8,title:'Formas de Pago y Precios',dur:'4 min',content:'<p>Opciones de pago flexibles:</p><ul><li><strong>Contado:</strong> Sin interés</li><li><strong>2-3 cuotas:</strong> +5% de interés</li><li><strong>Tarjeta (1, 3, 6 cuotas):</strong> Ver tasas vigentes</li><li><strong>Promociones semanales:</strong> Descuento 10% comprando 2+ excursiones</li><li><strong>Descuentos por cantidad:</strong> Grupos +6 personas: 15% dto</li></ul><p>Siempre ofrece la opción más ventajosa para el cliente.</p>'},
+      {id:9,title:'Manejo de Consultas y Disponibilidad',dur:'3 min',content:'<p>Checklist antes de confirmar reserva:</p><ul><li>✓ Verificar disponibilidad en calendar (status: Abierto/Full/Suspendido)</li><li>✓ Confirmar requisitos físicos del cliente</li><li>✓ Informar punto de encuentro y horario exacto</li><li>✓ Listar qué llevar (ropa, protección solar, etc.)</li><li>✓ Enviar voucher con código y instrucciones</li></ul><p>En caso de clima adverso, informar inmediatamente con opciones de reprogramación.</p>'}
+    ],
+    tabs:[
+      {label:'🎬 Video del Módulo', id:'t20'},
+      {label:'🌄 Todo el año', id:'t21'},
+      {label:'❄️ Invierno', id:'t22'},
+      {label:'🚢 Lacustres & Aventura', id:'t23'},
+      {label:'💲 Pagos & Divisas', id:'t24'},
+      {label:'🎮 Juego: Clasificá Excursiones', id:'t25'}
+    ],
+    content:{
+      t20:'<div class="scard" style="border-left-color:#1e6e5a"><h3>🎬 Video — Módulo 2</h3><p style="margin-bottom:1rem">Mirá el video completo antes de avanzar. El avatar te guía por todo el catálogo de excursiones.</p><div style="background:#0d1f2d;border-radius:12px;overflow:hidden;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center"><div style="font-size:3rem">🎬</div><div style="color:rgba(255,255,255,.8);font-size:.95rem">Video Módulo 2 — Próximamente</div><div style="color:rgba(255,255,255,.5);font-size:.8rem">Cuando tengas el link de YouTube, reemplazá la línea del video en el HTML</div><div style="background:rgba(255,255,255,.08);border-radius:8px;padding:.75rem 1.2rem;color:#e8b84b;font-size:.8rem;font-family:monospace">VIDEO_M2 = "https://youtube.com/embed/TU_ID"</div></div></div><div class="alert" style="margin-top:0">💡 <strong>Cómo agregar el video:</strong> Subí a YouTube como "No listado" → copiá el link de inserción → reemplazá el placeholder en el HTML.</div>',
+      t21:'<div class="scard"><h3>🌄 Excursiones Todo el Año — Terrestres</h3><div class="egrid"><div class="ecard"><h4>🏔 Cerro Tronador y Ventisquero Negro</h4><div class="etag">🕘 9:00 - 18:30 hs</div><div class="eprice">$49.500</div><div class="eprice2">💳 Tarjeta 1/3 cuotas: $59.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Parque Nacional Nahuel Huapi. Incluye: guía terrestre. No incluye: comidas, tasas de Parques.</p></div><div class="ecard"><h4>🛣 San Martín de los Andes — 7 Lagos</h4><div class="etag">🕘 8:00 - 18:30 hs</div><div class="eprice">$59.500</div><div class="eprice2">💳 Tarjeta 1/3 cuotas: $71.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Villa la Angostura + ruta 7 lagos + San Martín. No incluye: comidas.</p></div><div class="ecard"><h4>⭕ Circuito Chico y Cerro Campanario</h4><div class="etag">🕘 8:30-12:30 / 14:30-19:00</div><div class="eprice">$19.500</div><div class="eprice2">💳 Tarjeta: $23.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Vista 360° de la ciudad. No incluye: ticket ascenso Campanario (opcional).</p></div><div class="ecard"><h4>🚐 Traslado Cerro Catedral</h4><div class="etag">🕘 8-16 / 10-14 / 13-18</div><div class="eprice">$17.500</div><div class="eprice2">💳 3 cuotas: $21.000 — 0 a 2 años libre</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Centro de esquí más importante de Latinoamérica. No incluye: almuerzo, tickets aerosilla.</p></div><div class="ecard"><h4>🏘 Villa La Angostura y Cerro Bayo</h4><div class="etag">Ma/Ju/Sa — 🕘 8:30-18:00</div><div class="eprice">$47.500</div><div class="eprice2">💳 3 cuotas: $57.000 — 0 a 2 libre</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Invierno (jun-sep). No incluye: comidas, tasas Parques, ticket Cerro Bayo.</p></div><div class="ecard"><h4>🔄 Circuito Grande</h4><div class="etag">Lu/Mi/Vi — 🕘 8:30-18:00</div><div class="eprice">$59.500</div><div class="eprice2">💳 Tarjeta: $71.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">240-300 km. Estepa patagónica + bosques + lagos + Villa Traful + Villa La Angostura.</p></div><div class="ecard"><h4>🌿 Bolsón y Lago Puelo</h4><div class="etag">Ma/Ju/Sa — 🕘 8:30-18:30</div><div class="eprice">$49.500</div><div class="eprice2">💳 Tarjeta: $59.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Solo jueves y sábados. Chubut. No incluye: comidas, tasas Parques.</p></div></div></div>',
+      t22:'<div class="scard"><h3>❄️ Excursiones de Invierno (Jun — Sep)</h3><p style="margin-bottom:1rem">Experiencias especiales en temporada invernal con nieve y actividades exclusivas.</p></div>',
+      t23:'<div class="scard"><h3>🚢 Excursiones Lacustres</h3><div class="egrid"><div class="ecard"><h4>🏝 Isla Victoria y Bosque de Arrayanes</h4><div class="etag">🕘 10:30-18:30 / 12:30-18:30 — Puerto Pañuelo km 25</div><div class="eprice">Ad: $136.000</div><div class="eprice2">Menor 5-12a y Jubilado: $70.000 · 0-4a libre · Traslado opcional: $22.000</div></div><div class="ecard"><h4>⚓ Puerto Blest y Cascada Los Cantaros</h4><div class="etag">🕘 8:30-17 / 11:30-19 — Puerto Pañuelo</div><div class="eprice">Ad: $136.000</div><div class="eprice2">Menor/Jubilado: $70.000 · 0-4a libre · Con Lago Frías: $190.000 / $97.000</div></div><div class="ecard"><h4>⛵ Cruce de los Lagos Andinos</h4><div class="etag">Bariloche → Puerto Varas (Chile)</div><div class="eprice">Arg/Chi: USD 253 · Extranjero: USD 325</div><div class="eprice2">Solo efectivo en dólares · Menores: USD 127 / USD 162</div></div><div class="ecard"><h4>⛵ Velero El Orgulloso</h4><div class="etag">🕘 12-15 / 14-17 · Km 14 Av. Bustillo</div><div class="eprice">Ad: $66.850 / Menor -11a: $52.850</div><div class="eprice2">💳 1 pago: $80.200 / $63.450 · 0-4a libre</div></div></div></div>',
+      t24:'<div class="scard"><h3>👶 Categorías de pasajeros</h3><ul class="inc-list"><li>👨 <strong>Adulto</strong> — 12 años o más</li><li>👦 <strong>Niño</strong> — 2 a 11 años</li><li>👶 <strong>Infante (INF)</strong> — 0 a 2 años — <span style="color:#2ecc71;font-weight:600">Liberado en la mayoría de excursiones</span></li></ul><div class="alert">⚠️ Elegir bien la categoría: puede afectar el precio de la reserva.</div></div><div class="scard"><h3>💲 Formas de pago</h3><ul class="inc-list"><li>💰 <strong>Efectivo / Transferencia</strong> — Precio base siempre</li><li>💳 <strong>Débito / Crédito 1 a 3 cuotas</strong> — Con recargo (aprox. 20%)</li><li>🌐 <strong>PIX / otros</strong> — Disponible en pagos mixtos</li></ul></div><div class="scard"><h3>💱 Manejo de divisas — Turismo extranjero</h3><ul class="step-list"><li><span class="snum">1</span><div>Partir del <strong>monto que entrega el pasajero</strong></div></li><li><span class="snum">2</span><div>Calcular su valor en pesos al <strong>tipo de cambio del día</strong> según tipo de billete</div></li><li><span class="snum">3</span><div>Restar el valor de la actividad</div></li><li><span class="snum">4</span><div>El resto es <strong>vuelto en pesos</strong> (solo efectivo)</div></li></ul><div class="alert">⚠️ No se aceptan billetes dañados, arrugados, escritos o rotos. Deben estar en perfecto estado.</div></div>',
+      t25:'<div id="game-excursiones"></div>'
+    },
+    quiz:[
+      {q:"¿Cuánto cuesta el Cerro Tronador en efectivo?",opts:["$42.000","$59.500","$49.500","$35.000"],correct:2},
+      {q:"¿Cuál es el precio con tarjeta del paseo San Martín de los Andes?",opts:["$59.500","$71.400","$65.000","$80.000"],correct:1},
+      {q:"¿Qué edad define a un 'Niño' en las reservas?",opts:["0 a 2 años","5 a 12 años","2 a 11 años","3 a 14 años"],correct:2},
+      {q:"¿Qué significa 'INF' en las categorías de pasajeros?",opts:["Internacional","Infante (0 a 2 años)","Información","Informal"],correct:1},
+      {q:"¿Cuánto cuesta el Traslado Cerro Catedral en temporada todo el año?",opts:["$49.500","$59.400","$17.500","$31.200"],correct:2},
+      {q:"¿Cuánto cuesta el Traslado Cerro Catedral en temporada invierno?",opts:["$17.500","$19.500","$31.200","$25.000"],correct:2},
+      {q:"¿Qué NO incluye el Cerro Tronador?",opts:["Guía terrestre","Las tasas de ingreso a Parques Nacionales","El transporte","El recorrido"],correct:1},
+      {q:"¿En qué días opera Villa La Angostura & Cerro Bayo (todo el año)?",opts:["Todos los días","Martes, jueves y sábados","Lunes, miércoles y viernes","Solo fin de semana"],correct:1},
+      {q:"¿Cuánto cuesta el Rafting Light en el Río Manso en efectivo?",opts:["$129.500","$79.500","$75.000","$60.000"],correct:2},
+      {q:"¿Cuánto cuesta la Isla Victoria para adultos en efectivo?",opts:["$70.000","$136.000","$110.000","$90.000"],correct:1},
+      {q:"¿Cuánto cuesta el Culipatín Cerro López en efectivo?",opts:["$79.000","$239.500","$119.500","$109.500"],correct:2},
+      {q:"¿Cuánto cuesta Roca Negra para adultos en efectivo?",opts:["$69.500","$183.000","$144.000","$288.000"],correct:3},
+      {q:"¿A partir de qué edad se considera 'Adulto'?",opts:["10 años","16 años","12 años","18 años"],correct:2},
+      {q:"¿En qué estado deben estar los billetes extranjeros para ser aceptados?",opts:["Cualquier estado","Perfecto estado, sin daños ni escrituras","Solo billetes nuevos","Solo dólares"],correct:1},
+      {q:"¿Qué se usa para agregar traslados adicionales como Puerto Pañuelo?",opts:["Botón 'Sumar pasajero'","Botón '+ Agregar extra'","Campo 'Servicio adicional'","Opción 'Traslado'"],correct:1},
+      {q:"¿Con qué se puede combinar el Traslado Cerro Catedral?",opts:["7 Lagos","Cerro Tronador","Circuito Chico","San Martín de los Andes"],correct:2},
+      {q:"¿Qué período corresponde a las 'excursiones de invierno'?",opts:["Mayo a agosto","Junio a septiembre","Julio a octubre","Abril a julio"],correct:1},
+      {q:"¿Cuánto cuesta el Circuito Chico en efectivo?",opts:["$49.500","$59.500","$19.500","$29.500"],correct:2},
+      {q:"¿Cuánto cuesta el Canopy para adultos en efectivo?",opts:["$89.500","$99.500","$79.500","$110.000"],correct:3},
+      {q:"¿Cuánto cuesta el Puerto Blest con Lago Frías para adultos?",opts:["$136.000","$190.000","$97.000","$70.000"],correct:1}
+    ]
+  },
+  {
+    id:3, icon:'🧾', title:'Módulo 3 — Carga de Comprobantes & Gestión', desc:'¡Módulo 3! Acá vas a aprender cómo cerrar correctamente cada venta: cargar comprobantes, seleccionar métodos de pago, manejar descuentos con autorización, comunicarte con el equipo y practicar con casos reales.',
+    color:'m3', lessons:[
+      {id:10,title:'Sistema de Carga y Vouchers',dur:'5 min',content:'<p>Cada reserva requiere comprobante en el sistema:</p><ul><li>Accedé a Panel de Operaciones → "Nueva Reserva"</li><li>Cargá datos: Cliente, excursión, fecha, cantidad</li><li>Selecciona método de pago (efectivo, tarjeta, transferencia)</li><li>El sistema genera código único (ej: VOU-2024-001543)</li><li>Envía automáticamente al cliente por WhatsApp y email</li></ul><p><strong>Importante:</strong> Sin comprobante, no hay reserva válida. Siempre verificá estado: Pagado/Pendiente/Cancelado.</p>'},
+      {id:11,title:'Pagos Mixtos y Gestión de Descuentos',dur:'6 min',content:'<p>Manejo de pagos complejos:</p><ul><li><strong>Pago mixto:</strong> Efectivo $500 + tarjeta $1.000 → registra ambos</li><li><strong>Descuentos autorizados:</strong> Máx 20% (requiere aprobación SP)</li><li><strong>Código promocional:</strong> Aplicable en el sistema (precargar en panel)</li><li><strong>Cancelaciones:</strong> Reembolso según política (ver módulo 1)</li><li><strong>Cambios:</strong> Diferencia se acredita como saldo para próxima compra</li></ul><p>Reporta diariamente movimientos a tu SP para auditoría.</p>'},
+      {id:12,title:'Comunicación Interna y Equipo',dur:'4 min',content:'<p>Coordinación interna en Chatwoot equipo:</p><ul><li>Usa etiquetas: #CONFIRMADO #PENDIENTE #CANCELADO</li><li>Menciona a SP (@nombre_supervisor) para aprobaciones</li><li>Cierra tickets con resumen: cliente, monto, excursión, fecha</li><li>Sincroniza diariamente con Operaciones</li><li>Reporta incidencias en reunión diaria de equipo (10am)</li></ul><p>Grupos de WhatsApp internos: NO. Todo en Chatwoot para auditoría.</p>'}
+    ],
+    tabs:[
+      {label:'🎬 Video del Módulo', id:'t30'},
+      {label:'🧾 Carga de Vouchers', id:'t31'},
+      {label:'🏢 Equipo & Roles', id:'t32'},
+      {label:'📩 Comunicación', id:'t33'},
+      {label:'🧪 Casos Prácticos', id:'t34'}
+    ],
+    content:{
+      t30:'<div class="scard" style="border-left-color:#6e3a1a"><h3>🎬 Video — Módulo 3</h3><p style="margin-bottom:1rem">Mirá el video completo antes de avanzar. El avatar te guía por el protocolo de carga y gestión de ventas.</p><div style="background:#0d1f2d;border-radius:12px;overflow:hidden;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center"><div style="font-size:3rem">🎬</div><div style="color:rgba(255,255,255,.8);font-size:.95rem">Video Módulo 3 — Próximamente</div><div style="color:rgba(255,255,255,.5);font-size:.8rem">Cuando tengas el link de YouTube, reemplazá la línea del video en el HTML</div><div style="background:rgba(255,255,255,.08);border-radius:8px;padding:.75rem 1.2rem;color:#e8b84b;font-size:.8rem;font-family:monospace">VIDEO_M3 = "https://youtube.com/embed/TU_ID"</div></div></div><div class="alert" style="margin-top:0">💡 <strong>Cómo agregar el video:</strong> Subí a YouTube como "No listado" → copiá el link de inserción → reemplazá el placeholder en el HTML.</div>',
+      t31:'<div class="scard"><h3>✅ Objetivo del cierre de venta</h3><p>Cerrar cada venta correctamente con: comprobante correspondiente, método de pago preciso, y datos exactos del pasajero, actividad y cobro.</p></div><div class="scard"><h3>📋 Protocolo de carga paso a paso</h3><ul class="step-list"><li><span class="snum">1</span><div><strong>Subir archivo del comprobante</strong><br><span style="color:#5a7a91;font-size:.85rem">Formato: imagen o PDF legible. El monto debe coincidir con el total registrado.</span></div></li><li><span class="snum">2</span><div><strong>Seleccionar método de pago (obligatorio)</strong><br><span style="color:#5a7a91;font-size:.85rem">💵 Efectivo · 🏦 Transferencia · 💳 Tarjeta. Esto define el cierre contable.</span></div></li><li><span class="snum">3</span><div><strong>Completar depósito, saldo y precio</strong><br><span style="color:#5a7a91;font-size:.85rem">El total debe coincidir con el comprobante.</span></div></li><li><span class="snum">4</span><div><strong>Sumar pasajeros con la categoría correcta</strong><br><span style="color:#5a7a91;font-size:.85rem">Adultos (12+) · Niños (2-11) · Infantes (0-2). Elegir bien porque afecta el precio.</span></div></li><li><span class="snum">5</span><div><strong>Agregar extras si corresponde</strong><br><span style="color:#5a7a91;font-size:.85rem">Traslados a Puerto Pañuelo para Isla Victoria, Blest, etc. Controlar que coincida con los pax que lo necesitan.</span></div></li><li><span class="snum">6</span><div><strong>Controlar todo antes de guardar</strong><br><span style="color:#5a7a91;font-size:.85rem">Actividad correcta ✓ Fecha y horario ✓ Método de pago ✓ Datos del pasajero ✓</span></div></li></ul></div><div class="scard"><h3>🔄 Pagos mixtos</h3><p>Si el cliente paga con distintos métodos, crear múltiples líneas separando los montos:</p><div style="background:#f0f7fd;border-radius:8px;padding:1rem;margin-top:.75rem;font-size:.85rem;color:#0f2d4a;line-height:1.8">Adulto 1 → Tarjeta<br>Adulto 2 → Efectivo<br>Adulto 3 → PIX</div></div><div class="scard"><h3>🔐 Descuentos — Solo con autorización</h3><p>Autorización exclusiva de <strong>ADM 03</strong>. No aplicar descuentos sin mensaje o aprobación directa. Todos los vouchers con descuento deben tener en notas el <strong>código correspondiente</strong> entregado por ADM al momento de la aprobación.</p><div class="alert">⚠️ Nunca aplicar descuentos sin el código de ADM.</div></div>',
+      t32:'<div class="scard"><h3>👥 Estructura del equipo</h3><ul class="inc-list"><li>👔 <strong>EAS</strong> — Eduardo Alejandro Sopranzi (área ejecutiva)</li><li>🔧 <strong>SS</strong> — Sergio Sopranzi (área operativa)</li><li>👩 <strong>SP002 Magali</strong> — Recursos Humanos</li><li>💼 <strong>SP003</strong> — Descuentos y promociones</li><li>💰 <strong>SP004 Cecilia</strong> — Tesorería</li><li>💻 <strong>SP005 Yamila</strong> — Tecnología y Líder Equipo Telemática</li><li>🏆 <strong>SP007 Rocio</strong> — TS y Líder Ventas Online</li><li>⚙️ <strong>SP008 Simon</strong> — Operatividad</li></ul></div><div class="scard"><h3>💱 Tesorería</h3><p>Los responsables de tesorería son <strong>SP004 Cecilia</strong> y <strong>SP007 Rocio</strong>.</p></div><div class="scard"><h3>🏢 Oficinas</h3><div class="egrid"><div class="ecard"><h4>Bunker (B1)</h4><p style="font-size:.8rem;color:#5a7a91">Oficina Virtual — Mitre 83</p></div><div class="ecard"><h4>Turismo Bariloche (TB1)</h4><p style="font-size:.8rem;color:#5a7a91">Presencial — Mitre 83</p></div><div class="ecard"><h4>Patagonia Booking (PB)</h4><p style="font-size:.8rem;color:#5a7a91">Presencial — Mitre 131</p></div><div class="ecard"><h4>Turismo Bariloche (TB2)</h4><p style="font-size:.8rem;color:#5a7a91">Presencial — Mitre 332</p></div><div class="ecard"><h4>Turismo Patagonia (TP)</h4><p style="font-size:.8rem;color:#5a7a91">Presencial — Mitre 415</p></div></div></div>',
+      t33:'<div class="scard"><h3>📩 Cómo reportar un error en un voucher</h3><p>Siempre contactar directamente con <strong>ADM 003</strong>:</p><div style="background:#f0f7fd;border-radius:8px;padding:1.2rem;margin-top:.75rem;font-size:.85rem;color:#0f2d4a;line-height:1.8"><strong>1. Presentarte:</strong><br>"Hola, soy [Nombre] – Vendedor/a PB-XX"<br><br><strong>2. Enviar número de voucher:</strong><br>"Voucher #001245"<br><br><strong>3. Explicar el error brevemente:</strong><br>"Error en el horario de pick-up cargado. Debía ser 14:30 y quedó como 13:30."</div><div class="alert">⚠️ No enviar mensajes informales o sin información completa.</div></div><div class="scard"><h3>💱 Cotización del día — Turismo extranjero</h3><p>El equipo de ventas trabaja con turismo extranjero, por lo tanto el manejo correcto de divisas es clave.</p><ul class="step-list" style="margin-top:.75rem"><li><span class="snum">1</span><div>Siempre partir del <strong>monto que entrega el pasajero</strong></div></li><li><span class="snum">2</span><div>Calcular su valor en pesos al <strong>tipo de cambio según tipo de billete</strong></div></li><li><span class="snum">3</span><div>Restar el valor de la actividad</div></li><li><span class="snum">4</span><div>El resto es <strong>vuelto en pesos</strong> (solo efectivo)</div></li></ul><div class="alert">⚠️ No se pueden recibir billetes dañados, arrugados, escritos o rotos. Deben estar en perfecto estado para mantener el valor de cotización.</div></div>',
+      t34:'<div class="scard"><h3>🧪 Dinámica de Capacitación — Casos Prácticos</h3><p style="margin-bottom:1rem">Practicá la carga en sistema con información ficticia para entrenar y detectar errores comunes. Para cada prueba, identificá qué harías en el sistema.</p></div><div class="scard" style="border-left-color:#2ecc71"><h3>🧪 Prueba 1</h3><ul class="inc-list"><li>👤 <strong>Paula Gómez</strong> — DNI: 30456789</li><li>🏨 Hotel Nevada – Centro</li><li>🎿 Actividad: <strong>Piedras Blancas Trineos</strong></li><li>📅 Fecha: 13/07/2025 — 2 adultos</li><li>💰 Forma de pago: <strong>Efectivo</strong></li></ul></div><div class="scard" style="border-left-color:#2ecc71"><h3>🧪 Prueba 2</h3><ul class="inc-list"><li>👤 <strong>Facundo Villar</strong> — DNI: 41234567</li><li>🏨 Hotel Huemul – Av. Bustillo Km 2</li><li>⭕ Actividad: <strong>Circuito Chico</strong></li><li>📅 Fecha: 15/07/2025 — 3 adultos + 1 menor</li><li>🏦 Forma de pago: <strong>Transferencia</strong></li><li>📝 Obs: Solicita asistencia para movilidad reducida</li></ul></div>'
+    },
+    quiz:[
+      {q:"¿Cuál es el objetivo del módulo de Carga de Comprobantes?",opts:["Solo registrar pagos","Cerrar cada venta con comprobante, método de pago y datos exactos","Solo controlar horarios","Gestionar quejas"],correct:1},
+      {q:"¿Qué formato debe tener el comprobante?",opts:["Solo PDF","Solo imagen JPG","Imagen o PDF legible","Documento Word"],correct:2},
+      {q:"¿Quién autoriza los descuentos?",opts:["SP007 Rocio","El vendedor","ADM 03","SP005 Yamila"],correct:2},
+      {q:"¿Qué debe figurar en notas cuando hay descuento aplicado?",opts:["El nombre del cliente","El código de descuento de ADM","La fecha","El motivo personal"],correct:1},
+      {q:"¿A quién se contacta para reportar errores en vouchers?",opts:["ADM 002","ADM 003","SP007","SP005 Yamila"],correct:1},
+      {q:"¿Qué es lo primero al contactar a ADM 003?",opts:["El número de voucher","El error ocurrido","Presentarse: nombre y código de vendedor","El nombre del cliente"],correct:2},
+      {q:"¿Cómo se manejan los pagos mixtos?",opts:["Un solo registro","Creando múltiples líneas separando los montos","Anotando en papel","No se pueden hacer"],correct:1},
+      {q:"¿Quién es SP005?",opts:["Rocio — Ventas Online","Cecilia — Tesorería","Yamila — Tecnología","Magali — RRHH"],correct:2},
+      {q:"¿Quién es SP007?",opts:["Yamila","Cecilia","Magali","Rocio — TS y Líder Ventas Online"],correct:3},
+      {q:"¿Qué gestiona ADM 002 y ADM 003?",opts:["Atención al cliente post venta","Correcciones económicas y desfacturación","Marketing y redes sociales","Logística de excursiones"],correct:1},
+      {q:"¿Qué atajo navega entre campos al cargar un comprobante?",opts:["CTRL+TAB","ALT+F4","TAB","CTRL+Enter"],correct:2},
+      {q:"¿Qué atajo accede al historial de copiado?",opts:["CTRL+V","Windows+V","CTRL+Z","ALT+V"],correct:1},
+      {q:"¿Cuál NO es función de ADM 002/003?",opts:["Correcciones de vouchers","Validación de datos económicos","Aprobar descuentos sin aviso previo","Modificar errores en reservas"],correct:2},
+      {q:"¿En qué calle está Patagonia Booking?",opts:["Mitre 83","Mitre 332","Mitre 131","Mitre 415"],correct:2},
+      {q:"¿Qué se controla siempre antes de guardar una reserva?",opts:["Solo el método de pago","Solo el nombre","Actividad, fecha, pago y datos del pasajero","Solo la fecha"],correct:2},
+      {q:"En la Prueba 7, Belén Ibarra necesita menú sin gluten. ¿Cómo lo registrás?",opts:["En el campo de observaciones del sistema","No se puede registrar","Llamando al proveedor directamente","En nota privada de CW solo"],correct:0},
+      {q:"En la Prueba 5, el pasajero no figura en Master. ¿Qué hacés?",opts:["Ignorar y cargar igual","Consultar al supervisor o al área técnica","Cancelar la reserva","Crear un perfil nuevo sin consultar"],correct:1},
+      {q:"¿Qué implica asignarse una conversación en CW?",opts:["Se cierra automáticamente","Compromiso de respuesta inmediata","Otro no puede verla","Magda se detiene"],correct:1},
+      {q:"¿Quién es el área ejecutiva de Patagonia Booking?",opts:["Sergio Sopranzi","Eduardo Alejandro Sopranzi","SP007 Rocio","ADM 002"],correct:1},
+      {q:"¿Cuándo se puede aplicar un descuento sin código de autorización?",opts:["Cuando el cliente lo pide","Monto menor a $5.000","SP lo aprueba verbalmente","Nunca — siempre se necesita código de ADM"],correct:3}
+    ]
+  }
+];
+
+// ============ STATE ============
+let state = {
+  name:'', role:'', userId:null, userLogin:'',
+  completed:{}, 
+  quizScores:{}, 
+  currentModule:null,
+  quizAnswers:{},
+  currentQuestion:0
+};
+
+// ============ LOCAL STORAGE ============
+function saveProgress(){
+  if(state.name && state.userLogin){
+    const userKey = 'pb_progress_'+state.userLogin;
+    const progressData = {
+      userId: state.userId,
+      name: state.name,
+      role: state.role,
+      completed: state.completed,
+      quizScores: state.quizScores,
+      lastUpdated: new Date().toISOString()
+    };
+    localStorage.setItem(userKey, JSON.stringify(progressData));
+    console.log('✓ Progreso guardado para:', state.userLogin);
+  }
+}
+
+function loadProgress(userId, userLogin){
+  const userKey = 'pb_progress_'+userLogin;
+  const saved = localStorage.getItem(userKey);
+  if(saved){
+    try {
+      const data = JSON.parse(saved);
+      console.log('✓ Progreso recuperado para:', userLogin, data);
+      return {
+        name: data.name,
+        role: data.role,
+        completed: data.completed || {},
+        quizScores: data.quizScores || {}
+      };
+    } catch(e) {
+      console.error('Error al parsear progreso:', e);
+      return null;
+    }
+  }
+  console.log('No hay progreso guardado para:', userLogin);
+  return null;
+}
+
+// ============ SCREENS ============
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(id==='s-dash') renderDashboard();
+}
+
+// ============ LOGIN ============
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value.trim();
+  
+  if(!user || !pass) {
+    toast('Completá usuario y contraseña');
+    return;
+  }
+  
+  // Verificar credenciales
+  const foundUser = findUserByCredentials(user, pass);
+  if(!foundUser) {
+    toast('❌ Usuario o contraseña incorrectos');
+    document.getElementById('loginPass').value = '';
+    return;
+  }
+  
+  // Si es admin, ir al panel
+  if(foundUser.role === 'admin') {
+    state.role = 'admin';
+    state.name = foundUser.name;
+    document.getElementById('abadge').textContent = '🔐 Admin';
+    renderAdminPanel();
+    showScreen('s-admin');
+    toast('✓ Acceso administrativo concedido 🔐', 'success');
+    return;
+  }
+  
+  // Cargar progreso guardado del vendedor/SP
+  state.name = foundUser.name;
+  state.role = foundUser.role;
+  state.userId = foundUser.id;
+  state.userLogin = foundUser.user;
+  
+  const saved = loadProgress(foundUser.id, foundUser.user);
+  state.completed = saved ? saved.completed : {};
+  state.quizScores = saved ? saved.quizScores : {};
+  
+  toast('¡Bienvenido/a '+foundUser.name+'! 👋','success');
+  
+  const roleLabels = {agente:'Agente',supervisor:'SP',vendedor:'Vendedor/a',sp:'SP',admin:'Administrador'};
+  document.getElementById('userPill').textContent = roleLabels[state.role];
+  document.getElementById('userPill2').textContent = roleLabels[state.role];
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  showScreen('s-dash');
+});
+
+function logout(){
+  console.log('Guardando progreso final...', state);
+  saveProgress();
+  state = {name:'',role:'',userId:null,userLogin:'',completed:{},quizScores:{},currentModule:null,quizAnswers:{},currentQuestion:0};
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  showScreen('s-login');
+  toast('Sesión cerrada. ¡Hasta luego! 👋');
+}
+
+// ============ DASHBOARD ============
+function renderDashboard(){
+  const totalLessons = modules.reduce((a,m)=>a+m.lessons.length,0);
+  const doneLessons = Object.keys(state.completed).length;
+  const doneMods = modules.filter(m=>m.lessons.every(l=>state.completed[l.id])).length;
+  const pct = Math.round((doneLessons/totalLessons)*100);
+
+  const grid = document.getElementById('modGrid');
+  grid.innerHTML = '';
+  modules.forEach(m=>{
+    const mDone = m.lessons.every(l=>state.completed[l.id]);
+    const mLessonsDone = m.lessons.filter(l=>state.completed[l.id]).length;
+    const mPct = Math.round((mLessonsDone/m.lessons.length)*100);
+    const quizDone = state.quizScores[m.id] !== undefined;
+    let statusText = mPct===0?'Pendiente':mDone?(quizDone?'✓ Completado':'Falta quiz'):`${mPct}% avance`;
+    const card = document.createElement('div');
+    card.className = `mcard ${m.color} ${mDone&&quizDone?'done':''}`;
+    card.onclick = ()=>openModule(m.id);
+    card.innerHTML = `
+      <div class="mbanner">${m.icon}<span class="mbadge ${mDone&&quizDone?'done':''}">${statusText}</span></div>
+      <div class="mbody">
+        <h3>${m.title}</h3>
+        <p>${m.desc}</p>
+        <div class="mmeta"><span>📖 ${m.lessons.length} lecciones</span><span>📝 Quiz final</span></div>
+        <div class="pbar"><div class="pfill" style="width:${mPct}%"></div></div>
+        <button class="btn-mod">Iniciar módulo</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ============ MODULE ============
+function openModule(id){
+  const m = modules.find(x=>x.id===id);
+  state.currentModule = m;
+  document.getElementById('hdr-title2').textContent = '⛰️ '+m.title;
+  
+  const tabsDiv = document.getElementById('modtabs');
+  tabsDiv.innerHTML = '';
+  
+  // Si el módulo tiene tabs personalizados (M2 o M3), usarlos
+  if(m.tabs && m.content){
+    m.tabs.forEach((tab, i)=>{
+      const tabBtn = document.createElement('button');
+      tabBtn.className = `tab ${i===0?'active':''}`;
+      tabBtn.textContent = tab.label;
+      tabBtn.onclick = ()=>selectCustomTab(tab.id);
+      tabsDiv.appendChild(tabBtn);
+    });
+    selectCustomTab(m.tabs[0].id);
+  } else {
+    // Módulo 1: mostrar lecciones como siempre
+    m.lessons.forEach((l,i)=>{
+      const tab = document.createElement('button');
+      tab.className = `tab ${i===0?'active':''}`;
+      tab.textContent = `${i+1}. ${l.title}`;
+      tab.onclick = ()=>selectTab(i);
+      tabsDiv.appendChild(tab);
+    });
+    selectTab(0);
+  }
+  
+  showScreen('s-module');
+}
+
+function selectCustomTab(tabId){
+  const m = state.currentModule;
+  const content = m.content[tabId];
+  
+  // Actualizar tab activo
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  const contentDiv = document.getElementById('modcontent');
+  contentDiv.innerHTML = `<div class="scard">${content}</div>`;
+  
+  // Si es el tab del juego, inicializarlo
+  if(tabId === 't25') {
+    setTimeout(() => initExcursionGame(), 100);
+  }
+  
+  // Reinicializar lucide icons si existen
+  if(window.lucide) lucide.createIcons();
+
+// ============ EXCURSION CLASSIFICATION GAME ============
+const excursionGameData = {
+  categories: [
+    { id: 'aventura', name: '🏔️ Aventura (Trekking)', color: '#1a4a6e' },
+    { id: 'lacustre', name: '🚢 Lacustres', color: '#1e6e5a' },
+    { id: 'invierno', name: '❄️ Invierno', color: '#6e3a1a' },
+    { id: 'fauna', name: '🦅 Fauna & Naturaleza', color: '#4a3a6e' }
+  ],
+  excursions: [
+    { name: 'Cerro Tronador', category: 'aventura' },
+    { name: 'Piedras Blancas Trineos', category: 'invierno' },
+    { name: 'Isla Victoria', category: 'lacustre' },
+    { name: 'Avistaje de Pumas', category: 'fauna' },
+    { name: 'Circuito Chico', category: 'aventura' },
+    { name: 'Puerto Blest', category: 'lacustre' },
+    { name: 'Cerro Bayo', category: 'invierno' },
+    { name: 'Colonia Suiza', category: 'fauna' },
+    { name: 'Futaleufu Rafting', category: 'aventura' },
+    { name: 'Cruce Lagos Andinos', category: 'lacustre' },
+    { name: 'Nieve y Montaña', category: 'invierno' },
+    { name: 'Avistaje Aves', category: 'fauna' }
+  ]
+};
+
+let gameState = {
+  placed: {},
+  correct: 0,
+  total: 0,
+  gameActive: false
+};
+
+function initExcursionGame() {
+  const gameDiv = document.getElementById('game-excursiones');
+  if (!gameDiv) return;
+  
+  gameState = { placed: {}, correct: 0, total: 0, gameActive: true };
+  
+  const poolExcursions = [...excursionGameData.excursions].sort(() => Math.random() - 0.5);
+  
+  let html = `
+    <div class="game-title">🎮 Clasificá las Excursiones</div>
+    <div class="game-sub">Arrastrá cada excursión a la categoría correcta. ¡Acertá todas para ganar!</div>
+    
+    <div class="game-board" id="game-categories">`;
+  
+  excursionGameData.categories.forEach(cat => {
+    html += `
+      <div class="game-col" data-category="${cat.id}" ondrop="dropExcursion(event)" ondragover="dragOver(event)">
+        <h4>${cat.name}</h4>
+        <div class="game-col-items" data-cat="${cat.id}"></div>
+      </div>`;
+  });
+  
+  html += `</div>
+    
+    <div style="margin-bottom:1rem"><strong style="color:#0f2d4a">📌 Excursiones a clasificar:</strong></div>
+    <div class="game-pool" id="game-pool">`;
+  
+  poolExcursions.forEach((exc, i) => {
+    html += `
+      <div class="game-chip" draggable="true" data-excursion="${exc.name}" data-correct="${exc.category}" 
+           ondragstart="dragStart(event)" ondragend="dragEnd(event)" id="chip-${i}">
+        ${exc.name}
+      </div>`;
+  });
+  
+  html += `</div>
+    
+    <div style="text-align:center">
+      <button class="btn-game" onclick="resetGame()">🔄 Reintentar</button>
+      <button class="btn-game" style="background:#2ecc71" onclick="checkGameResult()" id="btn-check">✓ Verificar</button>
+    </div>
+    
+    <div class="game-score" id="game-score" style="display:none">
+      <h3 id="game-result">¿Listo?</h3>
+      <p id="game-msg">Clasificá todas las excursiones para ver tu resultado</p>
+    </div>`;
+  
+  gameDiv.innerHTML = html;
+}
+
+function dragStart(e) {
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', e.target.dataset.excursion);
+  e.dataTransfer.setData('correct-cat', e.target.dataset.correct);
+  e.target.classList.add('dragging');
+}
+
+function dragEnd(e) {
+  e.target.classList.remove('dragging');
+}
+
+function dragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.classList.add('over');
+}
+
+function dragLeave(e) {
+  if (e.currentTarget === e.target) {
+    e.currentTarget.classList.remove('over');
+  }
+}
+
+function dropExcursion(e) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('over');
+  
+  const excName = e.dataTransfer.getData('text/plain');
+  const correctCat = e.dataTransfer.getData('correct-cat');
+  const targetCat = e.currentTarget.dataset.category;
+  
+  const itemsContainer = e.currentTarget.querySelector('.game-col-items');
+  const chip = document.querySelector(`[data-excursion="${excName}"]`);
+  
+  if (!chip) return;
+  
+  // Crear chip en la columna
+  const chipClone = document.createElement('div');
+  chipClone.className = 'game-chip placed';
+  chipClone.textContent = excName;
+  chipClone.dataset.excursion = excName;
+  chipClone.dataset.category = targetCat;
+  chipClone.dataset.correct = correctCat;
+  chipClone.id = 'placed-' + excName.replace(/\s/g, '-');
+  chipClone.style.cursor = 'default';
+  
+  itemsContainer.appendChild(chipClone);
+  gameState.placed[excName] = targetCat;
+  
+  // Ocultar original
+  chip.style.opacity = '0.4';
+  chip.style.pointerEvents = 'none';
+}
+
+function checkGameResult() {
+  const placed = Object.keys(gameState.placed);
+  const excursions = excursionGameData.excursions;
+  
+  if (placed.length === 0) {
+    toast('¡Clasificá al menos una excursión!');
+    return;
+  }
+  
+  let correct = 0;
+  const feedback = [];
+  
+  // Verificar respuestas
+  excursions.forEach(exc => {
+    const userCat = gameState.placed[exc.name];
+    const chipEl = document.getElementById('placed-' + exc.name.replace(/\s/g, '-'));
+    
+    if (userCat) {
+      if (userCat === exc.category) {
+        correct++;
+        if (chipEl) {
+          chipEl.classList.add('correct');
+          chipEl.classList.remove('placed');
+        }
+        feedback.push(`✓ ${exc.name} en ${excursionGameData.categories.find(c => c.id === exc.category).name}`);
+      } else {
+        if (chipEl) {
+          chipEl.classList.add('wrong');
+          chipEl.classList.remove('placed');
+        }
+        const wrongCat = excursionGameData.categories.find(c => c.id === userCat).name;
+        const rightCat = excursionGameData.categories.find(c => c.id === exc.category).name;
+        feedback.push(`✗ ${exc.name}: colocaste en ${wrongCat}, debía ser ${rightCat}`);
+      }
+    }
+  });
+  
+  const total = placed.length;
+  const pct = Math.round((correct / total) * 100);
+  
+  const scoreDiv = document.getElementById('game-score');
+  const resultH3 = document.getElementById('game-result');
+  const msgP = document.getElementById('game-msg');
+  
+  if (pct === 100) {
+    resultH3.textContent = '🏆 ¡Perfecto!';
+    msgP.textContent = `Clasificaste todas las ${total} excursiones correctamente.`;
+  } else if (pct >= 70) {
+    resultH3.textContent = '👏 ¡Muy bien!';
+    msgP.textContent = `Acertaste ${correct} de ${total} (${pct}%). Casi lo logras.`;
+  } else {
+    resultH3.textContent = '📚 Seguí practicando';
+    msgP.textContent = `Acertaste ${correct} de ${total} (${pct}%). Revisá las categorías.`;
+  }
+  
+  scoreDiv.style.display = 'block';
+  document.getElementById('btn-check').textContent = '✓ Verificado';
+  document.getElementById('btn-check').disabled = true;
+  
+  toast(`Resultado: ${correct}/${total} correctas (${pct}%)`, pct >= 70 ? 'success' : '');
+}
+
+function resetGame() {
+  // Limpiar chips colocados
+  document.querySelectorAll('.game-col-items').forEach(col => col.innerHTML = '');
+  
+  // Restaurar chips en pool
+  document.querySelectorAll('.game-chip.dragging').forEach(chip => {
+    chip.style.opacity = '1';
+    chip.style.pointerEvents = 'auto';
+  });
+  
+  // Resetear estado
+  gameState = { placed: {}, correct: 0, total: 0, gameActive: true };
+  document.getElementById('game-score').style.display = 'none';
+  document.getElementById('btn-check').textContent = '✓ Verificar';
+  document.getElementById('btn-check').disabled = false;
+  
+  toast('¡Juego reiniciado! 🔄');
+}
+
+}
+
+function selectTab(idx){
+  const m = state.currentModule;
+  const l = m.lessons[idx];
+  
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  
+  const contentDiv = document.getElementById('modcontent');
+  contentDiv.innerHTML = `
+    <div class="scard">
+      ${l.content}
+      <button class="btn-complete ${state.completed[l.id]?'completed':''}" onclick="completeLesson(${l.id},this)" ${state.completed[l.id]?'disabled':''} style="background:#0f2d4a;color:#fff;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;margin-top:1rem">
+        ${state.completed[l.id]?'✓ Completada':'Marcar como completada'}
+      </button>
+    </div>`;
+  
+  const msgs = ['¡Hola! Soy Sofía. Navegá las pestañas y cuando estés listo, hacé el quiz.','Este es un tema importante. Leé con atención y luego marca como completada.','Ya casi terminás. Revisá todas las lecciones y hacé el quiz para verificar tus conocimientos.','Excelente, seguís avanzando. Completá todas las lecciones para desbloquear el quiz final.'];
+  document.getElementById('btext').textContent = msgs[Math.min(idx, msgs.length-1)];
+}
+
+function completeLesson(id, btn){
+  state.completed[id] = true;
+  btn.classList.add('completed');
+  btn.textContent = '✓ Completada';
+  btn.disabled = true;
+  saveProgress();
+  toast('¡Lección completada! 🎯','success');
+  console.log('Estado actualizado:', state);
+}
+
+function startQuizSession(){
+  const m = state.currentModule;
+  const allDone = m.lessons.every(l=>state.completed[l.id]);
+  if(!allDone){
+    toast('Completá todas las lecciones primero 📖');
+    return;
+  }
+  if(state.quizScores[m.id]!==undefined){
+    toast('Ya completaste este quiz con '+state.quizScores[m.id]+'%');
+    return;
+  }
+  state.quizAnswers = {};
+  state.currentQuestion = 0;
+  renderQuizQuestion();
+  showScreen('s-quiz');
+}
+
+function speakAv(){
+  const bubble = document.getElementById('bubble');
+  bubble.classList.add('typing');
+  document.getElementById('avface').classList.add('speaking');
+  if('speechSynthesis' in window){
+    const msg = new SpeechSynthesisUtterance(document.getElementById('btext').textContent);
+    msg.lang = 'es-AR';
+    msg.rate = 0.95;
+    speechSynthesis.speak(msg);
+  }
+}
+
+function stopAv(){
+  document.getElementById('bubble').classList.remove('typing');
+  document.getElementById('avface').classList.remove('speaking');
+  speechSynthesis.cancel();
+}
+
+// ============ QUIZ ============
+function renderQuizQuestion(){
+  const m = state.currentModule;
+  const q = m.quiz[state.currentQuestion];
+  const total = m.quiz.length;
+  const pctProgress = ((state.currentQuestion + 1) / total) * 100;
+  
+  document.getElementById('qtitle').textContent = 'Evaluación — '+m.title;
+  document.getElementById('qmeta').textContent = `Pregunta ${state.currentQuestion + 1} de ${total}`;
+  document.getElementById('qpf').style.width = pctProgress + '%';
+  document.getElementById('qnum').textContent = `Pregunta ${state.currentQuestion + 1} de ${total}`;
+  document.getElementById('qtext').textContent = q.q;
+  
+  const optsDiv = document.getElementById('opts');
+  optsDiv.innerHTML = '';
+  q.opts.forEach((opt, i)=>{
+    const li = document.createElement('li');
+    const isSelected = state.quizAnswers[state.currentQuestion] === i;
+    li.className = `obtn ${isSelected?'sel':''}`;
+    li.innerHTML = `<span class="oletter">${String.fromCharCode(65+i)}</span>${opt}`;
+    li.onclick = ()=>selectOption(i);
+    optsDiv.appendChild(li);
+  });
+  
+  const btnSkip = document.getElementById('bskip');
+  const btnNext = document.getElementById('bnext');
+  const btnFin = document.getElementById('bfin');
+  
+  if(state.currentQuestion < total - 1){
+    btnSkip.style.display = 'block';
+    btnNext.style.display = 'block';
+    btnFin.style.display = 'none';
+  } else {
+    btnSkip.style.display = 'none';
+    btnNext.style.display = 'none';
+    btnFin.style.display = 'block';
+  }
+}
+
+function selectOption(idx){
+  state.quizAnswers[state.currentQuestion] = idx;
+  document.querySelectorAll('.obtn').forEach((b,i)=>b.classList.toggle('sel',i===idx));
+}
+
+function skipQ(){
+  state.currentQuestion++;
+  renderQuizQuestion();
+}
+
+function nextQ(){
+  if(state.quizAnswers[state.currentQuestion] === undefined){
+    toast('Seleccioná una opción');
+    return;
+  }
+  state.currentQuestion++;
+  renderQuizQuestion();
+}
+
+function finishQuiz(){
+  if(state.quizAnswers[state.currentQuestion] === undefined){
+    toast('Seleccioná una opción para continuar');
+    return;
+  }
+  const m = state.currentModule;
+  let correct = 0;
+  m.quiz.forEach((q,i)=>{
+    if(state.quizAnswers[i] === q.correct) correct++;
+  });
+  const score = Math.round((correct/m.quiz.length)*100);
+  state.quizScores[m.id] = score;
+  saveProgress();
+  console.log('Quiz completado. Progreso guardado:', state);
+  
+  const emoji = score === 100 ? '🏆' : score >= 70 ? '👏' : '📚';
+  const title = score === 100 ? '¡Perfecto!' : score >= 70 ? '¡Muy bien!' : 'Casi lo logras';
+  const msg = score === 100 ? 'Dominás este módulo completamente.' : score >= 70 ? 'Podés continuar con el siguiente módulo.' : 'Revisá el material e intentá de nuevo.';
+  
+  document.getElementById('r-emoji').textContent = emoji;
+  document.getElementById('r-title').textContent = title;
+  document.getElementById('r-subtitle').textContent = `${score}% - ${correct}/${m.quiz.length} correctas`;
+  document.getElementById('r-msg').textContent = msg;
+  document.getElementById('r-next').textContent = score >= 70 ? '✅ Podés avanzar al próximo módulo o intentar otro.' : '📖 Revisá las lecciones y volvé a intentar cuando estés listo.';
+  
+  // Registrar resultado en panel admin
+  recordQuizResult(state.name, state.role, m.title, correct, m.quiz.length);
+  
+  showScreen('s-result');
+  checkCertificate();
+}
+
+function checkCertificate(){
+  const allModsDone = modules.every(m=>m.lessons.every(l=>state.completed[l.id]));
+  const allQuizDone = modules.every(m=>state.quizScores[m.id]!==undefined);
+  if(allModsDone && allQuizDone){
+    const avg = Math.round(modules.reduce((a,m)=>a+state.quizScores[m.id],0)/modules.length);
+    document.getElementById('certName').textContent = state.name;
+    document.getElementById('certScore').textContent = 'Puntuación promedio: '+avg+'%';
+    document.getElementById('certDate').textContent = new Date().toLocaleDateString('es-AR',{year:'numeric',month:'long',day:'numeric'});
+    setTimeout(()=>{
+      toast('🏆 ¡Felicitaciones! Obtuviste tu certificación','success');
+      setTimeout(()=>showScreen('s-cert'),2000);
+    },3000);
+  }
+}
+
+// ============ TOAST ============
+function toast(msg, type){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast'+(type?' '+type:'');
+  setTimeout(()=>t.classList.add('show'),50);
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ============ ADMIN USERS ============
+let adminUsers = [
+  {id:1, name:'Admin System', user:'admin', pass:'12345', role:'admin', office:'Central', email:'admin@pb.com'},
+  {id:2, name:'Yamila López', user:'yamila.lopez', pass:'yamila123', role:'sp', office:'PB', email:'yamila@pb.com'},
+  {id:3, name:'María García', user:'maria.garcia', pass:'maria123', role:'vendedor', office:'PB', email:'maria@pb.com'},
+  {id:4, name:'Carlos Ruiz', user:'carlos.ruiz', pass:'carlos123', role:'vendedor', office:'TB1', email:'carlos@pb.com'},
+  {id:5, name:'Rocío Fernández', user:'rocio.fernandez', pass:'rocio123', role:'sp', office:'TB2', email:'rocio@pb.com'}
+];
+
+function findUserByCredentials(user, pass){
+  return adminUsers.find(u => u.user === user && u.pass === pass);
+}
+
+let adminResults = [];
+
+// ============ DATA SDK HANDLER ============
+const dataHandler = {
+  onDataChanged(data) {
+    adminResults = data;
+    if(document.getElementById('rtbody')) {
+      renderAdminResults();
+    }
+  }
+};
+
+// Inicializar Data SDK
+(async () => {
+  if(window.dataSdk) {
+    const result = await window.dataSdk.init(dataHandler);
+    if(!result.isOk) {
+      console.error('Data SDK init failed:', result.error);
+    }
+  }
+})();
+
+function doAdminLogin(){
+  const user = document.getElementById('adUsername').value;
+  const pass = document.getElementById('adPassword').value;
+  const foundUser = findUserByCredentials(user, pass);
+  if(foundUser && foundUser.role === 'admin'){
+    state.role = 'admin';
+    state.name = foundUser.name;
+    document.getElementById('abadge').textContent = '🔐 Admin';
+    renderAdminPanel();
+    document.getElementById('adUsername').value = '';
+    document.getElementById('adPassword').value = '';
+    showScreen('s-admin');
+    toast('✓ Acceso administrativo concedido 🔐', 'success');
+  } else {
+    toast('❌ Credenciales de admin inválidas');
+    document.getElementById('adPassword').value = '';
+  }
+}
+
+function renderAdminPanel(){
+  renderAdminResults();
+  renderUsersList();
+}
+
+function renderAdminResults(){
+  const tbody = document.getElementById('rtbody');
+  tbody.innerHTML = '';
+  if(adminResults.length === 0){
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#5a7a91;padding:1.5rem">Sin resultados registrados</td></tr>';
+    return;
+  }
+  adminResults.forEach(r=>{
+    const score = r.score_percentage || 0;
+    const status = score >= 70 ? '<span class="passed">✓ Aprobado</span>' : '<span class="failed">✗ Reprobado</span>';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.student_name}</td>
+      <td>${r.student_user}</td>
+      <td>${r.module_name}</td>
+      <td>${r.quiz_date}</td>
+      <td>${r.correct_answers}/${r.total_questions}</td>
+      <td><span class="score">${score}%</span></td>
+      <td>${status}</td>`;
+    tbody.appendChild(tr);
+  });
+  updateStatusBar();
+}
+
+function updateStatusBar(){
+  const total = adminResults.length;
+  const passed = adminResults.filter(r=>(r.score_percentage || 0) >= 70).length;
+  const failed = adminResults.filter(r=>(r.score_percentage || 0) < 70).length;
+  const statusBar = document.getElementById('notion-status-bar');
+  statusBar.innerHTML = `
+    <span>📈 Total exámenes: <strong>${total}</strong></span>
+    <span style="color:#2ecc71">✓ Aprobados: <strong>${passed}</strong></span>
+    <span style="color:#e74c3c">✗ Reprobados: <strong>${failed}</strong></span>`;
+}
+
+function renderUsersList(){
+  const ulist = document.getElementById('ulist');
+  ulist.innerHTML = '';
+  const delUserSel = document.getElementById('delUser');
+  delUserSel.innerHTML = '<option value="">Seleccionar usuario...</option>';
+  
+  adminUsers.filter(u => u.role !== 'admin').forEach(u=>{
+    const roleIcons = {vendedor:'👤', sp:'👨‍💼'};
+    const item = document.createElement('div');
+    item.className = 'uitem';
+    item.innerHTML = `
+      <div><strong>${u.name}</strong><br><span style="font-size:.75rem;opacity:.7">@${u.user} • ${u.office}</span></div>
+      <span class="uitem-badge">${roleIcons[u.role]} ${u.role.toUpperCase()}</span>`;
+    ulist.appendChild(item);
+    
+    const opt = document.createElement('option');
+    opt.value = u.user;
+    opt.textContent = `${u.name} (@${u.user})`;
+    delUserSel.appendChild(opt);
+  });
+}
+
+function deleteUserProgress(){
+  const userToDelete = document.getElementById('delUser').value;
+  if(!userToDelete){
+    toast('Selecciona un usuario');
+    return;
+  }
+  
+  const foundUser = adminUsers.find(u => u.user === userToDelete);
+  if(!foundUser){
+    toast('Usuario no encontrado');
+    return;
+  }
+  
+  const userKey = 'pb_progress_' + userToDelete;
+  localStorage.removeItem(userKey);
+  
+  document.getElementById('delUser').value = '';
+  toast(`✓ Progreso de ${foundUser.name} eliminado correctamente`, 'success');
+  console.log('Progreso eliminado para:', userToDelete);
+}
+
+function switchAtab(name, el){
+  document.querySelectorAll('.atab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.asec').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('sec-'+name).classList.add('active');
+}
+
+function addUser(){
+  const name = document.getElementById('nn').value.trim();
+  const user = document.getElementById('nu').value.trim();
+  const pass = document.getElementById('np').value.trim();
+  const role = document.getElementById('nr').value;
+  const office = document.getElementById('no').value;
+  const email = document.getElementById('ne').value.trim();
+
+  if(!name || !user || !pass || !email){
+    toast('Completá todos los campos');
+    return;
+  }
+  if(pass.length < 4){
+    toast('La contraseña debe tener al menos 4 caracteres');
+    return;
+  }
+  if(!email.includes('@')){
+    toast('Email inválido');
+    return;
+  }
+  if(adminUsers.some(u=>u.user === user)){
+    toast('El usuario ya existe');
+    return;
+  }
+
+  adminUsers.push({
+    id: Math.max(...adminUsers.map(u=>u.id)) + 1,
+    name, user, pass, role, office, email
+  });
+
+  document.getElementById('nn').value = '';
+  document.getElementById('nu').value = '';
+  document.getElementById('np').value = '';
+  document.getElementById('ne').value = '';
+  document.getElementById('nr').value = 'vendedor';
+  document.getElementById('no').value = 'TB1';
+
+  renderUsersList();
+  toast('✓ Usuario agregado correctamente', 'success');
+}
+
+function clearRes(){
+  if(adminResults.length === 0){
+    toast('No hay resultados para limpiar');
+    return;
+  }
+  adminResults = [];
+  renderAdminResults();
+  toast('✓ Resultados eliminados', 'success');
+}
+
+// Simulación: Agregar resultados al finalizar quiz (llamar desde finishQuiz)
+function recordQuizResult(name, user, moduleTitle, correct, total){
+  const score = Math.round((correct/total)*100);
+  const quizDate = new Date().toLocaleDateString('es-AR');
+  
+  // Registrar en Data SDK
+  if(window.dataSdk) {
+    (async () => {
+      // Determinar número de módulo
+      const moduleNum = moduleTitle.includes('Herramientas') ? 1 : moduleTitle.includes('Excursiones') ? 2 : 3;
+      const progressKey = `progress_module_${moduleNum}`;
+      
+      const result = await window.dataSdk.create({
+        student_name: name,
+        student_user: user,
+        module_name: moduleTitle,
+        quiz_date: quizDate,
+        correct_answers: correct,
+        total_questions: total,
+        score_percentage: score,
+        [progressKey]: score >= 70 ? 'completed' : 'pending'
+      });
+      if(!result.isOk) {
+        console.error('Error guardando resultado:', result.error);
+      }
+    })();
+  }
+}
+
+// ============ ELEMENT SDK ============
+const defaultConfig = {
+  main_title: 'Patagonia Booking',
+  background_color: '#0f2d4a',
+  surface_color: '#ffffff',
+  text_color: '#0d1f2d',
+  accent_color: '#e8b84b',
+  secondary_text_color: '#5a7a91',
+  font_family: 'DM Sans',
+  font_size: 16
+};
+
+function applyConfig(config) {
+  const title = config.main_title || defaultConfig.main_title;
+  const el = document.getElementById('main-title');
+  if (el) el.textContent = title;
+  const hdr = document.getElementById('hdr-title');
+  if (hdr) hdr.textContent = '⛰️ ' + title;
+  const hdr2 = document.getElementById('hdr-title2');
+  if (hdr2) hdr2.textContent = '⛰️ ' + title;
+
+  const bg = config.background_color || defaultConfig.background_color;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+  const accent = config.accent_color || defaultConfig.accent_color;
+  const secText = config.secondary_text_color || defaultConfig.secondary_text_color;
+  const font = config.font_family || defaultConfig.font_family;
+  const size = config.font_size || defaultConfig.font_size;
+
+  document.body.style.fontFamily = `${font}, sans-serif`;
+  document.body.style.fontSize = `${size}px`;
+  document.body.style.color = text;
+
+  document.querySelectorAll('.hdr').forEach(h => h.style.background = bg);
+  document.querySelectorAll('.mcard, .qcard, .cert, .lesson').forEach(c => c.style.background = surface);
+  document.querySelectorAll('.mbody h3, .qtext, .rcard h2').forEach(h => h.style.color = text);
+  document.querySelectorAll('.mbody p, .mmeta, .qnum, .cert-sub, .cert-detail, .cert-date').forEach(p => p.style.color = secText);
+  document.querySelectorAll('.btn-gold').forEach(b => {
+    b.style.background = `linear-gradient(135deg, ${accent}, ${accent}dd)`;
+    b.style.color = bg;
+  });
+
+  document.querySelectorAll('.hero h2, .mod-hero h2').forEach(h => {
+    h.style.fontFamily = `Playfair Display, ${font}, serif`;
+    h.style.fontSize = `${size * 2}px`;
+  });
+  document.querySelectorAll('.mbody h3').forEach(h => h.style.fontSize = `${size * 1.1}px`);
+  document.querySelectorAll('.mbody p, .lesson-inner p').forEach(p => p.style.fontSize = `${size * 0.9}px`);
+}
+
+if (window.elementSdk) {
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => { applyConfig(config); },
+    mapToCapabilities: (config) => ({
+      recolorables: [
+        { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+        { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+        { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+        { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
+        { get: () => config.secondary_text_color || defaultConfig.secondary_text_color, set: (v) => { config.secondary_text_color = v; window.elementSdk.setConfig({ secondary_text_color: v }); } }
+      ],
+      borderables: [],
+      fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+      fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+    }),
+    mapToEditPanelValues: (config) => new Map([
+      ['main_title', config.main_title || defaultConfig.main_title]
+    ])
+  });
+}
+
+lucide.createIcons();</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e6a57ec82753d5e',t:'MTc3NTI0MzExMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
