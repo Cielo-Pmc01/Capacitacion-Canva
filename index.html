@@ -15,19 +15,16 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
 .screen.active{display:flex}
 
 /* LOGIN */
-#s-login{background:linear-gradient(160deg,#0f2d4a,#1a4a6e,#0a1e30);align-items:center;justify-content:center;padding:2rem;display:flex}
+#s-login{background:linear-gradient(160deg,#0f2d4a,#1a4a6e,#0a1e30);align-items:center;justify-content:center;padding:2rem}
 .lcard{background:rgba(255,255,255,.07);backdrop-filter:blur(20px);border:1px solid rgba(200,230,245,.15);border-radius:24px;padding:3rem;width:100%;max-width:400px;text-align:center}
 .lcard h1{font-family:'Playfair Display',serif;color:#fff;font-size:1.8rem;margin:.5rem 0 .25rem}
 .lcard>p{color:rgba(200,230,245,.7);font-size:.85rem;margin-bottom:2rem}
 .lcard input,.lcard select{width:100%;padding:.85rem 1rem;border-radius:10px;border:1px solid rgba(200,230,245,.2);background:rgba(255,255,255,.08);color:#fff;font-family:'DM Sans',sans-serif;font-size:.95rem;margin-bottom:1rem;outline:none}
 .lcard input::placeholder{color:rgba(200,230,245,.4)}
-.lcard input:focus,.lcard select:focus{border-color:#e8b84b;box-shadow:0 0 0 3px rgba(232,184,75,.2)}
 .lcard select option{background:#0f2d4a}
 .btn-gold{width:100%;padding:1rem;background:linear-gradient(135deg,#e8b84b,#d4a030);color:#0f2d4a;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s}
 .btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,184,75,.35)}
-.btn-gold:active{transform:translateY(0)}
-.link-small{color:rgba(232,184,75,.8);text-decoration:none;font-size:.75rem;transition:color .2s}
-.link-small:hover{color:#e8b84b}
+.link-small{color:rgba(232,184,75,.8);text-decoration:none;font-size:.75rem}
 
 /* HEADER */
 .hdr{background:#0f2d4a;color:#fff;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
@@ -234,8 +231,7 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
   <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body>
-  <!-- LOGIN -->
+ <body><!-- LOGIN -->
   <div id="s-login" class="screen active">
    <div class="lcard">
     <div style="font-size:2.5rem;margin-bottom:.5rem">
@@ -243,8 +239,7 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
     </div>
     <h1 id="main-title">Patagonia Booking</h1>
     <p>Plataforma de Capacitación</p>
-    <form id="loginForm">
-     <input type="text" id="loginUser" placeholder="Usuario" required> <input type="password" id="loginPass" placeholder="Contraseña" required> <button type="submit" class="btn-gold">Ingresar a capacitación</button>
+    <form id="loginForm"><input type="text" id="loginUser" placeholder="Usuario" required> <input type="password" id="loginPass" placeholder="Contraseña" required> <button type="submit" class="btn-gold">Ingresar a capacitación</button>
     </form><br><a href="#" class="link-small" onclick="showScreen('s-admin-login'); return false;">¿Sos administrador? Ingresá aquí</a>
    </div>
   </div><!-- ADMIN LOGIN -->
@@ -267,7 +262,8 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
       Resultados y gestión de accesos
      </div>
     </div>
-    <div style="display:flex;gap:1rem;align-items:center"><span class="abadge" id="abadge">🔐 Admin</span> <button class="btn-link" onclick="logout()">Salir</button>
+    <div style="display:flex;gap:1rem;align-items:center">
+     <span class="abadge" id="abadge">🔐 Admin</span> <button class="btn-link" onclick="logout()">Salir</button>
     </div>
    </div>
    <div class="atabs" id="atabs">
@@ -303,28 +299,23 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
       <div class="acard">
        <h4>👤 Usuarios activos</h4>
        <div id="ulist"></div>
-       <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #d0e5f2"><label style="display:block;font-size:.8rem;color:#0f2d4a;font-weight:600;margin-bottom:.5rem">🗑 Borrar progreso de usuario</label> <select id="delUser" style="width:100%;padding:.6rem;border-radius:8px;border:1px solid #d0e5f2;font-family:'DM Sans',sans-serif;font-size:.85rem;margin-bottom:.5rem"> <option value="">Seleccionar usuario...</option> </select> <button class="bsm" style="width:100%;background:#e74c3c;color:#fff" onclick="deleteUserProgress()">🗑 Borrar progreso</button>
+       <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid #d0e5f2">
+        <label style="display:block;font-size:.8rem;color:#0f2d4a;font-weight:600;margin-bottom:.5rem">🗑 Borrar progreso de usuario</label> <select id="delUser" style="width:100%;padding:.6rem;border-radius:8px;border:1px solid #d0e5f2;font-family:'DM Sans',sans-serif;font-size:.85rem;margin-bottom:.5rem"> <option value="">Seleccionar usuario...</option> </select> <button class="bsm" style="width:100%;background:#e74c3c;color:#fff" onclick="deleteUserProgress()">🗑 Borrar progreso</button>
        </div>
       </div>
       <div class="acard">
        <h4>➕ Agregar usuario</h4>
-       <div class="ufg">
-        <label>Nombre completo</label><input type="text" id="nn" placeholder="María García">
+       <div class="ufg"><label>Nombre completo</label><input type="text" id="nn" placeholder="María García">
        </div>
-       <div class="ufg">
-        <label>Usuario (login)</label><input type="text" id="nu" placeholder="maria.garcia">
+       <div class="ufg"><label>Usuario (login)</label><input type="text" id="nu" placeholder="maria.garcia">
        </div>
-       <div class="ufg">
-        <label>Contraseña</label><input type="password" id="np" placeholder="Mínimo 4 caracteres">
+       <div class="ufg"><label>Contraseña</label><input type="password" id="np" placeholder="Mínimo 4 caracteres">
        </div>
-       <div class="ufg">
-        <label>Rol</label> <select id="nr"><option value="vendedor">Vendedor/a</option><option value="sp">SP — Supervisor</option></select>
+       <div class="ufg"><label>Rol</label> <select id="nr"><option value="vendedor">Vendedor/a</option><option value="sp">SP — Supervisor</option></select>
        </div>
-       <div class="ufg">
-        <label>Oficina</label> <select id="no"><option value="TB1">Turismo Bariloche — Mitre 83</option><option value="TB2">Turismo Bariloche — Mitre 332</option><option value="PB">Patagonia Booking — Mitre 131</option><option value="TP">Turismo Patagonia — Mitre 415</option><option value="B1">Bunker / Virtual</option></select>
+       <div class="ufg"><label>Oficina</label> <select id="no"><option value="TB1">Turismo Bariloche — Mitre 83</option><option value="TB2">Turismo Bariloche — Mitre 332</option><option value="PB">Patagonia Booking — Mitre 131</option><option value="TP">Turismo Patagonia — Mitre 415</option><option value="B1">Bunker / Virtual</option></select>
        </div>
-       <div class="ufg">
-        <label>Email</label><input type="email" id="ne" placeholder="usuario@pb.com">
+       <div class="ufg"><label>Email</label><input type="email" id="ne" placeholder="usuario@pb.com">
        </div><button class="bsm add" onclick="addUser()" style="width:100%;padding:.6rem">Agregar usuario</button>
       </div>
      </div>
@@ -332,26 +323,23 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
    </div>
   </div>
   <div id="s-dash" class="screen">
-   <header class="hdr">
-    <span class="hdr-brand" id="hdr-title">⛰️ Patagonia Booking</span>
-    <div class="hdr-right">
-     <span class="pill" id="userPill">Agente</span> <button class="btn-link" onclick="logout()">Salir</button>
+   <header class="hdr"><span class="hdr-brand" id="hdr-title">⛰️ Patagonia Booking</span>
+    <div class="hdr-right"><span class="pill" id="userPill">Agente</span> <button class="btn-link" onclick="logout()">Salir</button>
     </div>
    </header>
    <div class="hero">
     <h2>¡Bienvenido/a al programa!</h2>
     <p>Completá los 3 módulos para certificarte como vendedor/a de Patagonia Booking</p>
-    <div class="hero-stats"><span>📚 3 Módulos</span><span>⏱ 2 hs c/u</span><span>✅ 20 preguntas</span>
+    <div class="hero-stats">
+     <span>📚 3 Módulos</span><span>⏱ 2 hs c/u</span><span>✅ 20 preguntas</span>
     </div>
    </div>
    <div class="mgrid" id="modGrid"></div>
    <div style="height:2rem"></div>
   </div><!-- MODULE DETAIL -->
   <div id="s-module" class="screen">
-   <header class="hdr">
-    <span class="hdr-brand" id="hdr-title2">⛰️ Patagonia Booking</span>
-    <div class="hdr-right">
-     <span class="pill" id="userPill2">Agente</span> <button class="btn-link" onclick="logout()">Salir</button>
+   <header class="hdr"><span class="hdr-brand" id="hdr-title2">⛰️ Patagonia Booking</span>
+    <div class="hdr-right"><span class="pill" id="userPill2">Agente</span> <button class="btn-link" onclick="logout()">Salir</button>
     </div>
    </header>
    <div class="avatar-sec">
@@ -369,11 +357,11 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
       <div class="btext" id="btext">
        ¡Hola! Soy Sofía. Navegá las pestañas y cuando estés listo, hacé el quiz.
       </div>
-      <div class="bdots">
-       <span></span><span></span><span></span>
+      <div class="bdots"><span></span><span></span><span></span>
       </div>
      </div>
-     <div class="av-controls"><button class="btn-av" onclick="speakAv()">🔊 Escuchar</button> <button class="btn-av" onclick="stopAv()">⏹ Parar</button> <button class="btn-av gold" onclick="startQuizSession()">📝 Ir al Quiz →</button>
+     <div class="av-controls">
+      <button class="btn-av" onclick="speakAv()">🔊 Escuchar</button> <button class="btn-av" onclick="stopAv()">⏹ Parar</button> <button class="btn-av gold" onclick="startQuizSession()">📝 Ir al Quiz →</button>
      </div>
     </div>
    </div>
@@ -381,7 +369,8 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
     <div class="tabs" id="modtabs"></div>
     <div id="modcontent"></div>
    </div>
-   <div class="nfooter"><button class="btn-n out" onclick="showScreen('s-dash')">← Dashboard</button> <button class="btn-n gold" onclick="startQuizSession()">Hacer el Quiz →</button>
+   <div class="nfooter">
+    <button class="btn-n out" onclick="showScreen('s-dash')">← Dashboard</button> <button class="btn-n gold" onclick="startQuizSession()">Hacer el Quiz →</button>
    </div>
   </div><!-- QUIZ -->
   <div id="s-quiz" class="screen">
@@ -402,10 +391,8 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
      <div class="qtext" id="qtext"></div>
      <ul class="opts" id="opts"></ul>
     </div>
-    <div class="qnav">
-     <span class="skip-hint" id="shint">Podés omitir y volver después</span>
-     <div style="display:flex;gap:.75rem">
-      <button class="btn-n out" id="bskip" onclick="skipQ()" style="display:none">Omitir →</button> <button class="btn-n solid" id="bnext" onclick="nextQ()" style="display:none">Siguiente →</button> <button class="btn-n gold" id="bfin" onclick="finishQuiz()" style="display:none">Finalizar ✓</button>
+    <div class="qnav"><span class="skip-hint" id="shint">Podés omitir y volver después</span>
+     <div style="display:flex;gap:.75rem"><button class="btn-n out" id="bskip" onclick="skipQ()" style="display:none">Omitir →</button> <button class="btn-n solid" id="bnext" onclick="nextQ()" style="display:none">Siguiente →</button> <button class="btn-n gold" id="bfin" onclick="finishQuiz()" style="display:none">Finalizar ✓</button>
      </div>
     </div>
    </div>
@@ -438,148 +425,94 @@ body{font-family:'DM Sans',sans-serif;background:#f5f9fc;color:#0d1f2d}
   </div><!-- TOAST -->
   <div class="toast" id="toast"></div>
   <script>
-// ============ USERS DATABASE ============
-const adminUsers = [
-  {id:1, name:'Admin System', user:'admin', pass:'12345', role:'admin', office:'Central', email:'admin@pb.com'},
-  {id:2, name:'Yamila López', user:'yamila.lopez', pass:'yamila123', role:'sp', office:'PB', email:'yamila@pb.com'},
-  {id:3, name:'María García', user:'maria.garcia', pass:'maria123', role:'vendedor', office:'PB', email:'maria@pb.com'},
-  {id:4, name:'Carlos Ruiz', user:'carlos.ruiz', pass:'carlos123', role:'vendedor', office:'TB1', email:'carlos@pb.com'},
-  {id:5, name:'Rocío Fernández', user:'rocio.fernandez', pass:'rocio123', role:'sp', office:'TB2', email:'rocio@pb.com'},
-  {id:6, name:'Demo User', user:'demo', pass:'demo123', role:'vendedor', office:'PB', email:'demo@pb.com'}
-];
-
-function findUserByCredentials(user, pass) {
-  return adminUsers.find(u => u.user === user && u.pass === pass);
-}
-
 // ============ DATA ============
 const modules = [
   {
-    id:0, icon:'🎓', title:'Introducción — Bienvenida', desc:'Bienvenido/a a Patagonia Booking. Comenzá conociendo nuestros valores, estructura del equipo y cómo funciona esta plataforma de capacitación. ¡Vamos a hacerlo juntos! 🚀',
-    color:'m0', lessons:[
-      {id:100,title:'¿Por qué Patagonia Booking?',dur:'3 min',content:'<p>Somos una empresa de turismo con 15 años de experiencia en la región de Bariloche. Nos especializamos en excursiones de aventura, naturales y culturales.</p><ul><li>✅ Más de 30 excursiones diferentes</li><li>✅ Equipo profesional y certificado</li><li>✅ Atención al cliente 24/7</li><li>✅ Presencia en múltiples plataformas digitales</li></ul><p><strong>Nuestra misión:</strong> Crear experiencias memorables en la Patagonia.</p>'},
-      {id:101,title:'Tu rol en el equipo',dur:'3 min',content:'<p>Como <strong>vendedor/a de Patagonia Booking</strong>, tu rol es fundamental:</p><ul><li>💰 <strong>Cerrar reservas</strong> de excursiones de forma efectiva</li><li>📱 <strong>Comunicarte</strong> con clientes vía WhatsApp y sistemas digitales</li><li>✅ <strong>Garantizar</strong> la mejor experiencia del cliente</li><li>📊 <strong>Registrar correctamente</strong> cada venta en el sistema</li><li>🤝 <strong>Trabajar en equipo</strong> con supervisores y compañeros</li></ul><p>Tu éxito es el éxito de Patagonia Booking.</p>'},
-      {id:102,title:'Cómo funciona esta capacitación',dur:'3 min',content:'<p>Apenderás todo lo necesario en 3 módulos progresivos:</p><div style="background:#f0f7fd;border-radius:12px;padding:1.5rem;margin:1rem 0;border-left:4px solid #0f2d4a"><strong style="color:#0f2d4a">📚 Módulo 1:</strong> Excursiones & Producto<br><span style="font-size:.9rem;color:#5a7a91">Catálogo, precios, formas de pago y gestión de consultas</span></div><div style="background:#f0f7fd;border-radius:12px;padding:1.5rem;margin:1rem 0;border-left:4px solid #1e6e5a"><strong style="color:#0f2d4a">💼 Módulo 2:</strong> Protocolos y Sistemas<br><span style="font-size:.9rem;color:#5a7a91">WhatsApp Business, Chatwoot, IA Magda y gestión centralizada</span></div><div style="background:#f0f7fd;border-radius:12px;padding:1.5rem;margin:1rem 0;border-left:4px solid #6e3a1a"><strong style="color:#0f2d4a">💪 Módulo 3:</strong> Desarrollo del Área Comercial<br><span style="font-size:.9rem;color:#5a7a91">Técnicas de cierre, manejo de objecciones y retención de clientes</span></div><p style="margin-top:1.5rem;font-size:.9rem;color:#5a7a91">Cada módulo tiene lecciones, tabs interactivos y un quiz final. Completá todo para obtener tu certificación. 🏆</p>'},
-      {id:103,title:'Qué esperar — Tu viaje de aprendizaje',dur:'3 min',content:'<p>Este programa está diseñado para que aprendas de forma práctica y amena:</p><ul><li>📖 <strong>Lecciones claras:</strong> Información esencial, sin distracciones</li><li>🎮 <strong>Actividades interactivas:</strong> Juegos y desafíos para fijar conocimiento</li><li>💬 <strong>Sofía, tu tutora:</strong> Acompañamiento a través de avatares y mensajes</li><li>📝 <strong>Quiz por módulo:</strong> Evalúa lo que aprendiste</li><li>🏆 <strong>Certificado final:</strong> Al completar todo con 70%+ promedio</li></ul><p style="margin-top:1.5rem"><strong>Duración total:</strong> ~6 horas • <strong>Ritmo:</strong> A tu velocidad • <strong>Soporte:</strong> Supervisores disponibles 24/7</p>'}
-    ]
-  },
-  {
-    id:1, icon:'🗺️', title:'Módulo 1 — Excursiones & Producto', desc:'¡Módulo 1! Conocé todo el catálogo de excursiones: las de todo el año, invierno, lacustres y aventura. Saber los precios y qué incluye cada servicio es tu principal herramienta de venta.',
+    id:1, icon:'💻', title:'Herramientas Digitales & Protocolo', desc:'WhatsApp Business, protocolo diario, Chatwoot e IA Magda. Claves para cerrar ventas online.',
     color:'m1', lessons:[
-      {id:1,title:'Catálogo de Excursiones',dur:'5 min',content:'<p>Nuestro catálogo incluye más de 30 excursiones:</p><ul><li><strong>Aventura (Trekking):</strong> $1.500-2.500 • Nivel físico: Medio-Alto</li><li><strong>Lacustres (Navegación):</strong> $1.200-1.800 • Apto todos</li><li><strong>Invierno:</strong> $2.000-3.500 • Experiencia recomendada</li><li><strong>Fauna (Avistaje):</strong> $1.800-2.200 • Familia friendly</li><li><strong>Cabalgata:</strong> $1.500 • Apto desde 8 años</li></ul><p>Consulta siempre el nivel físico y contraindicaciones con el cliente.</p>'},
-      {id:2,title:'Formas de Pago y Precios',dur:'4 min',content:'<p>Opciones de pago flexibles:</p><ul><li><strong>Contado:</strong> Sin interés</li><li><strong>2-3 cuotas:</strong> +5% de interés</li><li><strong>Tarjeta (1, 3, 6 cuotas):</strong> Ver tasas vigentes</li><li><strong>Promociones semanales:</strong> Descuento 10% comprando 2+ excursiones</li><li><strong>Descuentos por cantidad:</strong> Grupos +6 personas: 15% dto</li></ul><p>Siempre ofrece la opción más ventajosa para el cliente.</p>'},
-      {id:3,title:'Manejo de Consultas y Disponibilidad',dur:'3 min',content:'<p>Checklist antes de confirmar reserva:</p><ul><li>✓ Verificar disponibilidad en calendar (status: Abierto/Full/Suspendido)</li><li>✓ Confirmar requisitos físicos del cliente</li><li>✓ Informar punto de encuentro y horario exacto</li><li>✓ Listar qué llevar (ropa, protección solar, etc.)</li><li>✓ Enviar voucher con código y instrucciones</li></ul><p>En caso de clima adverso, informar inmediatamente con opciones de reprogramación.</p>'}
+      {id:1,title:'WhatsApp Business y Protocolo',dur:'5 min',content:'<p>WhatsApp Business es nuestra herramienta principal de comunicación:</p><ul><li>Respuesta en máximo 2 horas a consultas de clientes</li><li>Usar saludo estándar: "¡Hola! Bienvenido a Patagonia Booking 🏔️"</li><li>Mantener tono profesional pero cálido</li><li>Usar plantillas para respuestas frecuentes</li><li>Revisar catalogo y disponibilidad antes de responder</li></ul><p>Protocolo: Contacto → Consulta → Propuesta → Confirmación → Follow-up.</p>'},
+      {id:2,title:'Herramientas: Chatwoot y IA Magda',dur:'4 min',content:'<p>Chatwoot centraliza todas nuestras conversaciones:</p><ul><li>Asigna tickets automáticamente por equipo</li><li>Permite colaboración en tiempo real</li><li>IA Magda sugiere respuestas y siguientes pasos</li><li>Registra historial completo del cliente</li></ul><p>Cómo usar IA Magda: Escribe "/" y selecciona la sugerencia apropiada. Siempre revisa antes de enviar.</p>'},
+      {id:3,title:'Cierre de ventas online',dur:'3 min',content:'<p>Estrategia probada para cerrar ventas sin presión:</p><ul><li>Identificar necesidades: fechas, presupuesto, tipo de actividad</li><li>Ofertar paquetes personalizados (3 opciones: básica, standard, premium)</li><li>Usar testimonios: "Otro cliente en marzo amó esta excursión"</li><li>Crear urgencia suave: "Quedan 2 disponibilidades para esa fecha"</li><li>Cierre: "¿Confirmo tu reserva?" (sí/no simple)</li></ul><p>Recuerda: escucha primero, luego presenta soluciones.</p>'},
+      {id:4,title:'El celular: tu herramienta principal',dur:'5 min',content:'<div class="scard"><h3>📱 El celular: tu herramienta principal</h3><p>El equipo de Ventas Online debe tener presente que el teléfono celular es la herramienta principal de trabajo. De su correcto funcionamiento depende la comunicación con los clientes, el seguimiento de reservas y el rendimiento comercial diario.</p><p style="margin-top:.75rem">Cada integrante es responsable de cuidar, mantener operativo y en condiciones el dispositivo asignado, asegurando que WhatsApp funcione correctamente, con buena conexión, sonido y batería suficiente para toda la jornada.</p></div><div class="scard"><h3>✅ Pasos de ingreso diario</h3><ul class="step-list"><li><span class="snum">1</span><div><strong>Verificar que el celular esté encendido y operativo</strong><br><span style="color:#5a7a91;font-size:.85rem">Batería mínimo 80%, sonido y notificaciones activados.</span></div></li><li><span class="snum">2</span><div><strong>Controlar la conexión</strong><br><span style="color:#5a7a91;font-size:.85rem">Wi-Fi o datos móviles estables.</span></div></li><li><span class="snum">3</span><div><strong>Abrir WhatsApp Business</strong><br><span style="color:#5a7a91;font-size:.85rem">Verificar que las conversaciones estén visibles y sincronizadas. Comprobar envío y recepción de mensajes.</span></div></li><li><span class="snum">4</span><div><strong>Enviar ✅ a SP 005 Yamila</strong><br><span style="color:#5a7a91;font-size:.85rem">Número: +. . Confirma que el dispositivo está operativo y listo para comenzar.</span></div></li></ul><div class="alert">⚠️ Ningún agente puede iniciar tareas sin haber realizado el check de control diario.</div></div><div class="scard"><h3>🔧 Fallas y fin de jornada</h3><p>Si el celular presenta fallas (batería, conexión, WhatsApp o sonido): <strong>reportar inmediatamente al supervisor</strong> antes de iniciar tareas. Al finalizar el día, guardar el equipo en el espacio asignado y conectarlo a carga.</p></div>'},
+      {id:5,title:'Chatwoot: gestión centralizada',dur:'6 min',content:'<div class="scard"><h3>🧭 ¿Qué es Chatwoot?</h3><p>Chatwoot (CW) centraliza todos los canales digitales de la empresa: WhatsApp, perfiles sociales y más. Los vendedores no gestionan múltiples dispositivos, sino que usan CW para visualizar todos los mensajes entrantes en un solo lugar.</p></div><div class="scard"><h3>🤖 La IA Magda</h3><p>Magda está configurada para responder automáticamente todas las consultas entrantes, garantizando atención inmediata. <strong>No realiza cierres de venta ni toma decisiones comerciales.</strong></p><p style="margin-top:.75rem">Es válido y necesario dejar que Magda trabaje hasta que la consulta se acerque a una instancia de cierre, momento en que la intervención humana se vuelve necesaria.</p></div><div class="scard"><h3>⏱ Regla de los 3 minutos</h3><ul class="step-list"><li><span class="snum">1</span><div>El vendedor <strong>se asigna</strong> la conversación</div></li><li><span class="snum">2</span><div>Pausa a Magda con el botón <strong>"Human Response"</strong></div></li><li><span class="snum">3</span><div>Desde ese momento tiene <strong>3 minutos para responder</strong> al cliente</div></li><li><span class="snum">4</span><div>Si no se envía un mensaje en ese plazo, <strong>otro vendedor puede tomar la conversación</strong></div></li></ul><div class="alert">⚠️ Asignarse una conversación implica compromiso de respuesta inmediata.</div></div><div class="scard"><h3>🗃 Organización en CW</h3><p><strong>Bandejas:</strong> "Mías", "Sin asignar" y "Todos". El sistema no asigna automáticamente: cada vendedor debe asignarse manualmente la conversación. Es fundamental autoasignarse las conversaciones desatendidas.</p><p style="margin-top:.75rem"><strong>Herramientas internas:</strong> Nota privada (comentarios del equipo) · Prioridad (casos urgentes) · Etiquetas (tipo de actividad o marca). Para reportar errores a Yamila: etiqueta "Desarrollo" y nombrarla como SP 005 Yamila.</p></div>'},
+      {id:6,title:'Conversión online: técnicas y herramientas',dur:'5 min',content:'<div class="scard"><h3>🎯 Claves para la conversión online</h3><ul class="inc-list"><li>✅ <strong>Comunicación clara y empática</strong> — Sé amable, directo y resolutivo</li><li>🎙 <strong>Audios con voz cálida</strong> — No superar 30 segundos, buena dicción y tono profesional</li><li>❓ <strong>Preguntas clave</strong> — "¿Qué tipo de experiencia buscás?", "¿Cuántos días vas a estar?", "¿Viajás con niños?"</li><li>⚡ <strong>Respuestas rápidas</strong> — No dejes al cliente esperando. Si no podés cerrar, agendá y retomá</li><li>📸 <strong>Recursos visuales</strong> — Foto del producto, video corto o flyer de la actividad</li></ul></div><div class="scard"><h3>💬 Llamados a la acción</h3><p>Terminá siempre con una pregunta o propuesta concreta:</p><div style="background:#f0f7fd;border-radius:8px;padding:1rem;margin-top:.75rem;font-style:italic;color:#0f2d4a;font-size:.9rem;line-height:1.8">"¿Te reservo ya y te paso los medios de pago?"<br>"¿Querés que te arme un combo con esta y otra excursión?"</div></div><div class="scard"><h3>🛠 Herramientas de fidelización</h3><ul class="inc-list"><li>🎙 <strong>Audios</strong> — Máx. 30 seg, info clara, amena y segura</li><li>📹 <strong>Videollamadas</strong> — Para generar empatía o aclarar dudas de último momento</li><li>🏷 <strong>Notas en CW</strong> — Etiquetar prospecto como "Interesado" o "Esperando pago"</li></ul></div><div class="scard"><h3>📱 Gestión de reservas y contactos</h3><p>Desde CW podés crear el grupo de WhatsApp con el pax, agendado por <strong>apellido</strong> e incluyendo cantidad de pasajeros. Para cargar datos del pasajero: tres puntos del chat → "Añadir contacto" (nombre, teléfono, email).</p></div>'}
     ],
     quiz:[
-      {q:"¿Cuál es la categoría más cara de excursiones?",opts:["Aventura","Lacustres","Invierno","Fauna"],correct:2},
-      {q:"¿Cuánto descuento hay para grupos de +6 personas?",opts:["5%","10%","15%","20%"],correct:2},
-      {q:"¿Cuál es el punto más importante antes de confirmar una reserva?",opts:["El precio","Verificar disponibilidad y requisitos físicos","El horario solo","Los datos del cliente"],correct:1},
-      {q:"¿Qué debe incluir siempre una confirmación de reserva?",opts:["Solo el precio","Voucher con código e instrucciones","Solo el horario","Datos del cliente"],correct:1},
-      {q:"¿Cuál es la opción de pago SIN interés?",opts:["Tarjeta a cuotas","Contado","2-3 cuotas","Transferencia a 30 días"],correct:1},
-      {q:"¿Cuánto descuento hay por comprar 2+ excursiones?",opts:["5%","10%","15%","20%"],correct:1},
-      {q:"¿Qué tipo de excursión tiene nivel físico Medio-Alto?",opts:["Lacustre","Fauna","Aventura/Trekking","Cabalgata"],correct:2},
-      {q:"¿Cuál es el punto de encuentro que SIEMPRE debe informarse?",opts:["El hotel","Depende de la excursión","El centro de la ciudad","No es necesario"],correct:1},
-      {q:"¿En caso de clima adverso, qué debe hacerse?",opts:["Cancelar sin opción","Informar e ofrecer reprogramación","Esperar","Seguir igual"],correct:1},
-      {q:"¿A quién le preguntás la disponibilidad real de una excursión?",opts:["Al cliente","Al sistema de calendar","Al supervisor","Al sitio web"],correct:1},
-      {q:"¿Cuál es la edad mínima para la cabalgata?",opts:["5 años","8 años","10 años","12 años"],correct:1},
-      {q:"¿Qué debe llevar un cliente a una excursión de trekking?",opts:["Lo que quiera","Ropa cómoda, protección solar, etc.","Nada importante","Solo agua"],correct:1},
-      {q:"¿Cuál es el interés aproximado para 2-3 cuotas?",opts:["3%","5%","8%","10%"],correct:1},
-      {q:"¿Qué excursiones son 'Familia friendly'?",opts:["Aventura","Invierno","Fauna","Trekking"],correct:2},
-      {q:"¿Qué es más importante: el precio o la experiencia correcta?",opts:["El precio","La experiencia correcta","Ambas igual","Ninguna"],correct:1},
-      {q:"¿Cuándo se ofrece el descuento del 10%?",opts:["Siempre","En clima adverso","Comprando 2+ excursiones","A ancianos"],correct:2},
-      {q:"¿Quién confirma si hay disponibilidad de una excursión?",opts:["El cliente","El sistema de reservas","El guía","El supervisor"],correct:1},
-      {q:"¿Qué status de disponibilidad cancela la excursión?",opts:["Abierto","Full","Suspendido","Reprogramado"],correct:2},
-      {q:"¿Cuál es el rango de precio para aventura?",opts:["$1.200-1.800","$1.500-2.500","$2.000-3.500","$1.800-2.200"],correct:1},
-      {q:"¿Qué lleva siempre el voucher?",opts:["Solo nombre","Código y instrucciones","Solo fecha","Datos bancarios"],correct:1}
+      {q:"¿Cuál es la herramienta principal del equipo de Ventas Online?",opts:["La computadora","El teléfono celular","El sistema web","La impresora"],correct:1},
+      {q:"¿Cuál es el porcentaje mínimo de batería requerido al inicio de jornada?",opts:["50%","60%","70%","80%"],correct:3},
+      {q:"¿A quién se envía el ✅ de confirmación de operatividad diaria?",opts:["SP007 Rocio","SP004 Cecilia","SP005 Yamila","SP002 Magali"],correct:2},
+      {q:"¿Qué hace el botón 'Human Response' en Chatwoot?",opts:["Pone en espera al cliente","Pausa la IA Magda","Envía un mensaje automático","Cierra la conversación"],correct:1},
+      {q:"¿Cuánto tiempo tiene el vendedor para responder tras asignarse una conversación?",opts:["5 minutos","10 minutos","3 minutos","1 minuto"],correct:2},
+      {q:"¿Qué bandeja de CW muestra las conversaciones sin atender?",opts:["Mías","Todos","Sin asignar","Pendientes"],correct:2},
+      {q:"¿Qué etiqueta se usa para reportar errores técnicos a Yamila?",opts:["Error","Técnico","Desarrollo","Bug"],correct:2},
+      {q:"¿Cuánto deben durar máximo los audios de venta?",opts:["1 minuto","30 segundos","2 minutos","15 segundos"],correct:1},
+      {q:"¿Puede la IA Magda realizar cierres de venta?",opts:["Sí, siempre","Solo ventas menores a $10.000","No, nunca","Solo con autorización del SP"],correct:2},
+      {q:"¿Cómo se agenda al pasajero en el grupo de WhatsApp de CW?",opts:["Por nombre","Por DNI","Por apellido","Por número de reserva"],correct:2},
+      {q:"Si el celular presenta fallas, ¿qué debe hacer el vendedor?",opts:["Esperar al final del día","Reportar inmediatamente al supervisor","Reiniciar y continuar","Usar su celular personal"],correct:1},
+      {q:"Si no se responde en el plazo, ¿qué puede hacer otro vendedor?",opts:["Nada, debe esperar","Asignarse la conversación y continuar","Escalar al supervisor","Cerrar el chat"],correct:1},
+      {q:"¿Magda responde si detecta intervención humana directa?",opts:["Sí, siempre","No, solo responde si NO detecta intervención humana","Solo si el vendedor lo indica","Solo de noche"],correct:1},
+      {q:"¿Cuál es el objetivo del sistema de 3 minutos?",opts:["Aumentar ventas","Evitar que el cliente quede desatendido","Reducir costos operativos","Eliminar el uso de IA"],correct:1},
+      {q:"¿Qué debe hacer el vendedor al final del día con el celular?",opts:["Llevarlo a casa","Guardarlo y conectarlo a carga","Dejarlo apagado en el escritorio","Entregarlo al supervisor"],correct:1},
+      {q:"¿Qué herramienta de CW permite dejar comentarios solo visibles para el equipo?",opts:["Etiqueta","Nota privada","Prioridad","Alerta"],correct:1},
+      {q:"¿Cuál es una 'pregunta clave' para guiar una venta?",opts:["¿Tenés experiencia con excursiones?","¿Sabés cómo funciona el sistema?","¿Qué tipo de experiencia estás buscando?","¿Ya conocés Bariloche?"],correct:2},
+      {q:"¿Qué indica la herramienta 'Prioridad' en Chatwoot?",opts:["Conversación cerrada","Casos urgentes o con seguimiento especial","Cliente VIP","IA activa"],correct:1},
+      {q:"Si no podés cerrar la venta en el momento, ¿qué hacés?",opts:["Decirle que llame mañana","Dejar agendada la conversación y retomar con seguimiento","Pasarla a otro vendedor","Cerrar el chat y esperar"],correct:1},
+      {q:"¿Cuál es el tiempo máximo de respuesta en WhatsApp?",opts:["1 hora","2 horas","4 horas","24 horas"],correct:1}
     ]
   },
-
   {
-    id:2, icon:'💼', title:'Módulo 2 — Protocolos y Sistemas', desc:'¡Módulo 2! Aprendé cómo funcionan WhatsApp Business, Chatwoot, la IA Magda y el protocolo diario. Herramientas clave para cerrar ventas online con éxito.',
+    id:2, icon:'🗺️', title:'Módulo 2 — Excursiones & Producto', desc:'¡Módulo 2! Acá vas a conocer todo el catálogo de excursiones: las de todo el año, invierno, lacustres y aventura. Saber los precios y qué incluye cada servicio es tu principal herramienta de venta.',
     color:'m2', lessons:[
-      {id:7,title:'WhatsApp Business y Protocolo',dur:'5 min',content:'<p>WhatsApp Business es nuestra herramienta principal de comunicación:</p><ul><li>Respuesta en máximo 2 horas a consultas de clientes</li><li>Usar saludo estándar: "¡Hola! Bienvenido a Patagonia Booking 🏔️"</li><li>Mantener tono profesional pero cálido</li><li>Usar plantillas para respuestas frecuentes</li><li>Revisar catálogo y disponibilidad antes de responder</li></ul><p>Protocolo: Contacto → Consulta → Propuesta → Confirmación → Follow-up.</p>'},
-      {id:8,title:'Chatwoot y la IA Magda',dur:'4 min',content:'<p>Chatwoot centraliza todas nuestras conversaciones:</p><ul><li>Asigna tickets automáticamente por equipo</li><li>Permite colaboración en tiempo real</li><li>IA Magda sugiere respuestas y siguientes pasos</li><li>Registra historial completo del cliente</li></ul><p>Cómo usar IA Magda: Escribe "/" y selecciona la sugerencia apropiada. Siempre revisa antes de enviar.</p>'},
-      {id:9,title:'Gestión centralizada de conversaciones',dur:'3 min',content:'<p>Sistema de 3 minutos en Chatwoot:</p><ul><li>1️⃣ El vendedor se asigna la conversación</li><li>2️⃣ Pausa a Magda con "Human Response"</li><li>3️⃣ Tiene 3 minutos para responder</li><li>4️⃣ Si no responde, otro vendedor puede tomar la conversación</li></ul><p>Bandejas: "Mías", "Sin asignar" y "Todos". Autoasignate siempre las conversaciones.</p>'}
+      {id:7,title:'Catálogo de Excursiones',dur:'5 min',content:'<p>Nuestro catálogo incluye más de 30 excursiones:</p><ul><li><strong>Aventura (Trekking):</strong> $1.500-2.500 • Nivel físico: Medio-Alto</li><li><strong>Lacustres (Navegación):</strong> $1.200-1.800 • Apto todos</li><li><strong>Invierno:</strong> $2.000-3.500 • Experiencia recomendada</li><li><strong>Fauna (Avistaje):</strong> $1.800-2.200 • Familia friendly</li><li><strong>Cabalgata:</strong> $1.500 • Apto desde 8 años</li></ul><p>Consulta siempre el nivel físico y contraindicaciones con el cliente.</p>'},
+      {id:8,title:'Formas de Pago y Precios',dur:'4 min',content:'<p>Opciones de pago flexibles:</p><ul><li><strong>Contado:</strong> Sin interés</li><li><strong>2-3 cuotas:</strong> +5% de interés</li><li><strong>Tarjeta (1, 3, 6 cuotas):</strong> Ver tasas vigentes</li><li><strong>Promociones semanales:</strong> Descuento 10% comprando 2+ excursiones</li><li><strong>Descuentos por cantidad:</strong> Grupos +6 personas: 15% dto</li></ul><p>Siempre ofrece la opción más ventajosa para el cliente.</p>'},
+      {id:9,title:'Manejo de Consultas y Disponibilidad',dur:'3 min',content:'<p>Checklist antes de confirmar reserva:</p><ul><li>✓ Verificar disponibilidad en calendar (status: Abierto/Full/Suspendido)</li><li>✓ Confirmar requisitos físicos del cliente</li><li>✓ Informar punto de encuentro y horario exacto</li><li>✓ Listar qué llevar (ropa, protección solar, etc.)</li><li>✓ Enviar voucher con código y instrucciones</li></ul><p>En caso de clima adverso, informar inmediatamente con opciones de reprogramación.</p>'}
     ],
     tabs:[
       {label:'🎬 Video del Módulo', id:'t20'},
-      {label:'📱 WhatsApp Business', id:'t21'},
-      {label:'💬 Chatwoot & Magda', id:'t22'},
-      {label:'🔄 Gestión de Conversaciones', id:'t23'}
+      {label:'🌄 Todo el año', id:'t21'},
+      {label:'❄️ Invierno', id:'t22'},
+      {label:'🚢 Lacustres & Aventura', id:'t23'},
+      {label:'💲 Pagos & Divisas', id:'t24'},
+      {label:'🎮 Juego: Clasificá Excursiones', id:'t25'}
     ],
     content:{
-      t20:'<div class="scard" style="border-left-color:#1e6e5a"><h3>🎬 Video — Módulo 2</h3><p style="margin-bottom:1rem">Mirá el video completo antes de avanzar. El avatar te guía por los protocolos y sistemas digitales.</p><div style="background:#0d1f2d;border-radius:12px;overflow:hidden;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center"><div style="font-size:3rem">🎬</div><div style="color:rgba(255,255,255,.8);font-size:.95rem">Video Módulo 2 — Próximamente</div></div></div>',
-      t21:'<div class="scard"><h3>📱 WhatsApp Business — Protocolo de Atención</h3><p style="margin-bottom:1rem">Nuestra herramienta principal para comunicarnos con clientes. Debe ser profesional, rápida y amable.</p><ul class="inc-list"><li>✅ Respuesta máximo 2 horas</li><li>✅ Saludo estándar obligatorio</li><li>✅ Revisar disponibilidad antes de confirmar</li><li>✅ Usar plantillas para respuestas frecuentes</li><li>✅ Tono cálido pero profesional</li></ul></div>',
-      t22:'<div class="scard"><h3>💬 Chatwoot — Sistema Centralizado</h3><p style="margin-bottom:1rem">Chatwoot unifica WhatsApp, email y redes sociales en una sola plataforma. La IA Magda responde automáticamente.</p><ul class="inc-list"><li>🤖 <strong>IA Magda:</strong> Responde consultas automaticamente</li><li>🔤 <strong>Sugerencias:</strong> Magda sugiere las mejores respuestas</li><li>📝 <strong>Notas privadas:</strong> Comentarios solo para el equipo</li><li>🏷️ <strong>Etiquetas:</strong> Organiza por tipo de consulta</li></ul></div>',
-      t23:'<div class="scard"><h3>🔄 Regla de los 3 Minutos</h3><ul class="step-list"><li><span class="snum">1</span><div><strong>Te asignas la conversación</strong></div></li><li><span class="snum">2</span><div><strong>Pausas a Magda</strong> (botón "Human Response")</div></li><li><span class="snum">3</span><div><strong>Tenés 3 minutos para responder</strong></div></li><li><span class="snum">4</span><div><strong>Otro vendedor puede tomarla</strong> si no respondés</div></li></ul><div class="alert">⚠️ Asignarse implica compromiso inmediato de respuesta.</div></div>'
+      t20:'<div class="scard" style="border-left-color:#1e6e5a"><h3>🎬 Video — Módulo 2</h3><p style="margin-bottom:1rem">Mirá el video completo antes de avanzar. El avatar te guía por todo el catálogo de excursiones.</p><div style="background:#0d1f2d;border-radius:12px;overflow:hidden;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center"><div style="font-size:3rem">🎬</div><div style="color:rgba(255,255,255,.8);font-size:.95rem">Video Módulo 2 — Próximamente</div><div style="color:rgba(255,255,255,.5);font-size:.8rem">Cuando tengas el link de YouTube, reemplazá la línea del video en el HTML</div><div style="background:rgba(255,255,255,.08);border-radius:8px;padding:.75rem 1.2rem;color:#e8b84b;font-size:.8rem;font-family:monospace">VIDEO_M2 = "https://youtube.com/embed/TU_ID"</div></div></div><div class="alert" style="margin-top:0">💡 <strong>Cómo agregar el video:</strong> Subí a YouTube como "No listado" → copiá el link de inserción → reemplazá el placeholder en el HTML.</div>',
+      t21:'<div class="scard"><h3>🌄 Excursiones Todo el Año — Terrestres</h3><div class="egrid"><div class="ecard"><h4>🏔 Cerro Tronador y Ventisquero Negro</h4><div class="etag">🕘 9:00 - 18:30 hs</div><div class="eprice">$49.500</div><div class="eprice2">💳 Tarjeta 1/3 cuotas: $59.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Parque Nacional Nahuel Huapi. Incluye: guía terrestre. No incluye: comidas, tasas de Parques.</p></div><div class="ecard"><h4>🛣 San Martín de los Andes — 7 Lagos</h4><div class="etag">🕘 8:00 - 18:30 hs</div><div class="eprice">$59.500</div><div class="eprice2">💳 Tarjeta 1/3 cuotas: $71.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Villa la Angostura + ruta 7 lagos + San Martín. No incluye: comidas.</p></div><div class="ecard"><h4>⭕ Circuito Chico y Cerro Campanario</h4><div class="etag">🕘 8:30-12:30 / 14:30-19:00</div><div class="eprice">$19.500</div><div class="eprice2">💳 Tarjeta: $23.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Vista 360° de la ciudad. No incluye: ticket ascenso Campanario (opcional).</p></div><div class="ecard"><h4>🚐 Traslado Cerro Catedral</h4><div class="etag">🕘 8-16 / 10-14 / 13-18</div><div class="eprice">$17.500</div><div class="eprice2">💳 3 cuotas: $21.000 — 0 a 2 años libre</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Centro de esquí más importante de Latinoamérica. No incluye: almuerzo, tickets aerosilla.</p></div><div class="ecard"><h4>🏘 Villa La Angostura y Cerro Bayo</h4><div class="etag">Ma/Ju/Sa — 🕘 8:30-18:00</div><div class="eprice">$47.500</div><div class="eprice2">💳 3 cuotas: $57.000 — 0 a 2 libre</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Invierno (jun-sep). No incluye: comidas, tasas Parques, ticket Cerro Bayo.</p></div><div class="ecard"><h4>🔄 Circuito Grande</h4><div class="etag">Lu/Mi/Vi — 🕘 8:30-18:00</div><div class="eprice">$59.500</div><div class="eprice2">💳 Tarjeta: $71.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">240-300 km. Estepa patagónica + bosques + lagos + Villa Traful + Villa La Angostura.</p></div><div class="ecard"><h4>🌿 Bolsón y Lago Puelo</h4><div class="etag">Ma/Ju/Sa — 🕘 8:30-18:30</div><div class="eprice">$49.500</div><div class="eprice2">💳 Tarjeta: $59.400</div><p style="font-size:.78rem;color:#5a7a91;margin-top:.4rem">Solo jueves y sábados. Chubut. No incluye: comidas, tasas Parques.</p></div></div></div>',
+      t22:'<div class="scard"><h3>❄️ Excursiones de Invierno (Jun — Sep)</h3><p style="margin-bottom:1rem">Experiencias especiales en temporada invernal con nieve y actividades exclusivas.</p></div>',
+      t23:'<div class="scard"><h3>🚢 Excursiones Lacustres</h3><div class="egrid"><div class="ecard"><h4>🏝 Isla Victoria y Bosque de Arrayanes</h4><div class="etag">🕘 10:30-18:30 / 12:30-18:30 — Puerto Pañuelo km 25</div><div class="eprice">Ad: $136.000</div><div class="eprice2">Menor 5-12a y Jubilado: $70.000 · 0-4a libre · Traslado opcional: $22.000</div></div><div class="ecard"><h4>⚓ Puerto Blest y Cascada Los Cantaros</h4><div class="etag">🕘 8:30-17 / 11:30-19 — Puerto Pañuelo</div><div class="eprice">Ad: $136.000</div><div class="eprice2">Menor/Jubilado: $70.000 · 0-4a libre · Con Lago Frías: $190.000 / $97.000</div></div><div class="ecard"><h4>⛵ Cruce de los Lagos Andinos</h4><div class="etag">Bariloche → Puerto Varas (Chile)</div><div class="eprice">Arg/Chi: USD 253 · Extranjero: USD 325</div><div class="eprice2">Solo efectivo en dólares · Menores: USD 127 / USD 162</div></div><div class="ecard"><h4>⛵ Velero El Orgulloso</h4><div class="etag">🕘 12-15 / 14-17 · Km 14 Av. Bustillo</div><div class="eprice">Ad: $66.850 / Menor -11a: $52.850</div><div class="eprice2">💳 1 pago: $80.200 / $63.450 · 0-4a libre</div></div></div></div>',
+      t24:'<div class="scard"><h3>👶 Categorías de pasajeros</h3><ul class="inc-list"><li>👨 <strong>Adulto</strong> — 12 años o más</li><li>👦 <strong>Niño</strong> — 2 a 11 años</li><li>👶 <strong>Infante (INF)</strong> — 0 a 2 años — <span style="color:#2ecc71;font-weight:600">Liberado en la mayoría de excursiones</span></li></ul><div class="alert">⚠️ Elegir bien la categoría: puede afectar el precio de la reserva.</div></div><div class="scard"><h3>💲 Formas de pago</h3><ul class="inc-list"><li>💰 <strong>Efectivo / Transferencia</strong> — Precio base siempre</li><li>💳 <strong>Débito / Crédito 1 a 3 cuotas</strong> — Con recargo (aprox. 20%)</li><li>🌐 <strong>PIX / otros</strong> — Disponible en pagos mixtos</li></ul></div><div class="scard"><h3>💱 Manejo de divisas — Turismo extranjero</h3><ul class="step-list"><li><span class="snum">1</span><div>Partir del <strong>monto que entrega el pasajero</strong></div></li><li><span class="snum">2</span><div>Calcular su valor en pesos al <strong>tipo de cambio del día</strong> según tipo de billete</div></li><li><span class="snum">3</span><div>Restar el valor de la actividad</div></li><li><span class="snum">4</span><div>El resto es <strong>vuelto en pesos</strong> (solo efectivo)</div></li></ul><div class="alert">⚠️ No se aceptan billetes dañados, arrugados, escritos o rotos. Deben estar en perfecto estado.</div></div>',
+      t25:'<div id="game-excursiones"></div>'
     },
     quiz:[
-      {q:"¿Cuál es el tiempo máximo de respuesta en WhatsApp?",opts:["1 hora","2 horas","30 minutos","4 horas"],correct:1},
-      {q:"¿Cuál es el saludo estándar correcto?",opts:["Hola","¡Hola! Bienvenido a Patagonia Booking 🏔️","Qué tal","Buenos días"],correct:1},
-      {q:"¿Qué es Chatwoot?",opts:["Un banco","Sistema para gestionar conversaciones","Una red social","Un chat personal"],correct:1},
-      {q:"¿Qué hace la IA Magda?",opts:["Guía excursiones","Responde automáticamente consultas","Cierra ventas","Administra pagos"],correct:1},
-      {q:"¿Cuántos minutos tienes para responder en Chatwoot?",opts:["2 minutos","5 minutos","3 minutos","1 minuto"],correct:2},
-      {q:"¿Qué es el botón 'Human Response'?",opts:["Pausa a Magda","Pausa al cliente","Envía email","Cierra chat"],correct:0},
-      {q:"¿Dónde se pueden dejar notas SOLO para el equipo?",opts:["En el chat del cliente","Notas privadas en CW","En WhatsApp","No se puede"],correct:1},
-      {q:"¿Qué ocurre si no respondo en 3 minutos?",opts:["Nada","Otro vendedor puede tomar la conversación","Se cierra","Llamada de supervisor"],correct:1},
-      {q:"¿Para qué sirven las etiquetas en Chatwoot?",opts:["Solo decoración","Organizar conversaciones por tipo","Nada","Contar clientes"],correct:1},
-      {q:"¿Puedo hacer cierres de venta solo con Magda?",opts:["Sí","No, es automatizado","Solo montos menores","Depende del cliente"],correct:1},
-      {q:"¿Cuál es el protocolo básico?",opts:["Contacto → Venta → Fin","Contacto → Consulta → Propuesta → Confirmación → Follow-up","Solo hablar","No hay protocolo"],correct:1},
-      {q:"¿Se pueden editar las respuestas de Magda?",opts:["No","Sí, siempre revisa antes de enviar","Solo el admin","No las ves"],correct:1},
-      {q:"¿Qué bandeja muestras conversaciones sin asignar?",opts:["Mías","Todos","Sin asignar","Archivadas"],correct:2},
-      {q:"¿Es importante mantener tono profesional?",opts:["No, ser informal es mejor","Sí, es clave","Depende del cliente","Para admins solo"],correct:1},
-      {q:"¿Antes de responder qué debo verificar?",opts:["Nada","Disponibilidad y catálogo","Solo el precio","No es necesario"],correct:1},
-      {q:"¿Se pueden usar plantillas predefinidas?",opts:["No","Sí, para respuestas frecuentes","Solo en email","Para supervisores"],correct:1},
-      {q:"¿Chatwoot integra solo WhatsApp?",opts:["Sí","No, también email y redes sociales","Solo email","Solo redes"],correct:1},
-      {q:"¿Qué pasa cuando te asignas una conversación?",opts:["Nada","Compromiso de respuesta inmediata","Se duplica","Se cierra"],correct:1},
-      {q:"¿Cuál es el objetivo del sistema de 3 minutos?",opts:["Acelerar ventas","Evitar que clientes queden desatendidos","Reducir costos","Despedir vendedores"],correct:1},
-      {q:"¿Cuántas bandejas principales tiene Chatwoot?",opts:["2","3 — Mías, Sin asignar, Todos","4","5"],correct:1}
+      {q:"¿Cuánto cuesta el Cerro Tronador en efectivo?",opts:["$42.000","$59.500","$49.500","$35.000"],correct:2},
+      {q:"¿Cuál es el precio con tarjeta del paseo San Martín de los Andes?",opts:["$59.500","$71.400","$65.000","$80.000"],correct:1},
+      {q:"¿Qué edad define a un 'Niño' en las reservas?",opts:["0 a 2 años","5 a 12 años","2 a 11 años","3 a 14 años"],correct:2},
+      {q:"¿Qué significa 'INF' en las categorías de pasajeros?",opts:["Internacional","Infante (0 a 2 años)","Información","Informal"],correct:1},
+      {q:"¿Cuánto cuesta el Traslado Cerro Catedral en temporada todo el año?",opts:["$49.500","$59.400","$17.500","$31.200"],correct:2},
+      {q:"¿Cuánto cuesta el Traslado Cerro Catedral en temporada invierno?",opts:["$17.500","$19.500","$31.200","$25.000"],correct:2},
+      {q:"¿Qué NO incluye el Cerro Tronador?",opts:["Guía terrestre","Las tasas de ingreso a Parques Nacionales","El transporte","El recorrido"],correct:1},
+      {q:"¿En qué días opera Villa La Angostura & Cerro Bayo (todo el año)?",opts:["Todos los días","Martes, jueves y sábados","Lunes, miércoles y viernes","Solo fin de semana"],correct:1},
+      {q:"¿Cuánto cuesta el Rafting Light en el Río Manso en efectivo?",opts:["$129.500","$79.500","$75.000","$60.000"],correct:2},
+      {q:"¿Cuánto cuesta la Isla Victoria para adultos en efectivo?",opts:["$70.000","$136.000","$110.000","$90.000"],correct:1},
+      {q:"¿Cuánto cuesta el Culipatín Cerro López en efectivo?",opts:["$79.000","$239.500","$119.500","$109.500"],correct:2},
+      {q:"¿Cuánto cuesta Roca Negra para adultos en efectivo?",opts:["$69.500","$183.000","$144.000","$288.000"],correct:3},
+      {q:"¿A partir de qué edad se considera 'Adulto'?",opts:["10 años","16 años","12 años","18 años"],correct:2},
+      {q:"¿En qué estado deben estar los billetes extranjeros para ser aceptados?",opts:["Cualquier estado","Perfecto estado, sin daños ni escrituras","Solo billetes nuevos","Solo dólares"],correct:1},
+      {q:"¿Qué se usa para agregar traslados adicionales como Puerto Pañuelo?",opts:["Botón 'Sumar pasajero'","Botón '+ Agregar extra'","Campo 'Servicio adicional'","Opción 'Traslado'"],correct:1},
+      {q:"¿Con qué se puede combinar el Traslado Cerro Catedral?",opts:["7 Lagos","Cerro Tronador","Circuito Chico","San Martín de los Andes"],correct:2},
+      {q:"¿Qué período corresponde a las 'excursiones de invierno'?",opts:["Mayo a agosto","Junio a septiembre","Julio a octubre","Abril a julio"],correct:1},
+      {q:"¿Cuánto cuesta el Circuito Chico en efectivo?",opts:["$49.500","$59.500","$19.500","$29.500"],correct:2},
+      {q:"¿Cuánto cuesta el Canopy para adultos en efectivo?",opts:["$89.500","$99.500","$79.500","$110.000"],correct:3},
+      {q:"¿Cuánto cuesta el Puerto Blest con Lago Frías para adultos?",opts:["$136.000","$190.000","$97.000","$70.000"],correct:1}
     ]
   },
   {
-    id:3, icon:'💪', title:'Módulo 3 — Desarrollo del Área Comercial', desc:'¡Módulo 3! Aprendé técnicas avanzadas de cierre de ventas, gestión de objecciones, estrategias de retención y cómo maximizar tus ingresos.',
+    id:3, icon:'🧾', title:'Módulo 3 — Carga de Comprobantes & Gestión', desc:'¡Módulo 3! Acá vas a aprender cómo cerrar correctamente cada venta: cargar comprobantes, seleccionar métodos de pago, manejar descuentos con autorización, comunicarte con el equipo y practicar con casos reales.',
     color:'m3', lessons:[
-      {id:10,title:'Técnicas de Cierre',dur:'5 min',content:'<p>Estrategias para cerrar sin presión:</p><ul><li>Escucha activa: identificá necesidades reales</li><li>3 opciones de precio para elegir</li><li>Urgencia suave basada en disponibilidad real</li><li>Testimonios de clientes satisfechos</li><li>Pregunta directa al final: "¿Confirmo tu reserva?"</li></ul>'},
-      {id:11,title:'Manejo de Objecciones',dur:'4 min',content:'<p>Las 5 objeciones más comunes:</p><ul><li>"Es muy caro" → Mostrar valor incluido</li><li>"Necesito pensarlo" → Crear urgencia + agendar follow-up</li><li>"¿Es seguro?" → Certificaciones + testimonios + años de experiencia</li><li>"¿Qué incluye?" → Detallar sin empachar</li><li>"Llamo después" → Agendar día/hora específica</li></ul>'},
-      {id:12,title:'Retención y Comisiones',dur:'3 min',content:'<p>Tu ingreso depende de repetición:</p><ul><li>Comisión base: % por venta cerrada</li><li>Bonus por meta: extra si cierras X ventas/mes</li><li>Referidos: comisión si cliente trae amigos</li><li>Cliente satisfecho = vuelve + recomienda = dinero futuro</li></ul>'}
+      {id:10,title:'Sistema de Carga y Vouchers',dur:'5 min',content:'<p>Cada reserva requiere comprobante en el sistema:</p><ul><li>Accedé a Panel de Operaciones → "Nueva Reserva"</li><li>Cargá datos: Cliente, excursión, fecha, cantidad</li><li>Selecciona método de pago (efectivo, tarjeta, transferencia)</li><li>El sistema genera código único (ej: VOU-2024-001543)</li><li>Envía automáticamente al cliente por WhatsApp y email</li></ul><p><strong>Importante:</strong> Sin comprobante, no hay reserva válida. Siempre verificá estado: Pagado/Pendiente/Cancelado.</p>'},
+      {id:11,title:'Pagos Mixtos y Gestión de Descuentos',dur:'6 min',content:'<p>Manejo de pagos complejos:</p><ul><li><strong>Pago mixto:</strong> Efectivo $500 + tarjeta $1.000 → registra ambos</li><li><strong>Descuentos autorizados:</strong> Máx 20% (requiere aprobación SP)</li><li><strong>Código promocional:</strong> Aplicable en el sistema (precargar en panel)</li><li><strong>Cancelaciones:</strong> Reembolso según política (ver módulo 1)</li><li><strong>Cambios:</strong> Diferencia se acredita como saldo para próxima compra</li></ul><p>Reporta diariamente movimientos a tu SP para auditoría.</p>'},
+      {id:12,title:'Comunicación Interna y Equipo',dur:'4 min',content:'<p>Coordinación interna en Chatwoot equipo:</p><ul><li>Usa etiquetas: #CONFIRMADO #PENDIENTE #CANCELADO</li><li>Menciona a SP (@nombre_supervisor) para aprobaciones</li><li>Cierra tickets con resumen: cliente, monto, excursión, fecha</li><li>Sincroniza diariamente con Operaciones</li><li>Reporta incidencias en reunión diaria de equipo (10am)</li></ul><p>Grupos de WhatsApp internos: NO. Todo en Chatwoot para auditoría.</p>'}
     ],
-    tabs:[
-      {label:'📖 Técnicas de Cierre', id:'t30'},
-      {label:'🎯 Objecciones', id:'t31'},
-      {label:'💰 Retención', id:'t32'}
-    ],
-    content:{
-      t30:'<div class="scard"><h3>🎯 Cierre de Ventas</h3><p>Estrategias comprobadas para cerrar sin presión y mantener la confianza del cliente.</p><ul class="inc-list"><li>✅ Escucha activa de necesidades</li><li>✅ Ofrece 3 opciones de precio</li><li>✅ Crea urgencia basada en disponibilidad real</li><li>✅ Comparte testimonios de satisfacción</li><li>✅ Pregunta directa: "¿Confirmo tu reserva?"</li></ul></div>',
-      t31:'<div class="scard"><h3>⚠️ Las 5 Objeciones Más Comunes</h3><ul class="inc-list"><li><strong>"Es muy caro"</strong> → Destaca el valor incluido en la excursión</li><li><strong>"Necesito pensarlo"</strong> → Crea urgencia + agenda follow-up</li><li><strong>"¿Es seguro?"</strong> → Muestra certificaciones + testimonios</li><li><strong>"¿Qué incluye?"</strong> → Detalla sin abrumar</li><li><strong>"Llamo después"</strong> → Agenda día/hora específica</li></ul></div>',
-      t32:'<div class="scard"><h3>💵 Tu Ingreso en Patagonia</h3><p>Cómo se compone tu remuneración según el desempeño:</p><ul class="inc-list"><li>💰 Comisión base por cada venta cerrada</li><li>🎁 Bonus por alcanzar meta mensual</li><li>👥 Comisiones por referidos de clientes</li><li>⭐ Incentivos por reseñas positivas</li></ul><p style="margin-top:1rem;padding:.75rem;background:#f0f7fd;border-radius:8px;color:#0f2d4a"><strong>Clave:</strong> Cliente satisfecho = Vuelve + Recomienda = Dinero futuro</p></div>'
-    },
-    quiz:[
-      {q:"¿Cuál es la pregunta directa para cerrar una venta?",opts:["¿Te interesa?","¿Confirmo tu reserva?","¿Qué día preferís?","¿Cuál es tu presupuesto?"],correct:1},
-      {q:"¿Cuántas opciones de precio debes ofrecer?",opts:["1","2","3","Sin límite"],correct:2},
-      {q:"Ante la objeción 'Es muy caro', ¿qué haces?",opts:["Baja el precio","Destaca el valor incluido","Ofrece otra excursión","Termina la llamada"],correct:1},
-      {q:"¿Qué genera más comisión a futuro?",opts:["Vender caro una sola vez","Cliente satisfecho que recomienda","Descuentos agresivos","Vendedor con más clientes"],correct:1},
-      {q:"¿Cuándo se crea urgencia en una venta?",opts:["Siempre","Nunca","Basada en disponibilidad real","Solo con turistas extranjeros"],correct:2},
-      {q:"¿Qué es un referido?",opts:["Un cliente que vuelve","Un cliente nuevo traído por uno existente","Una devolución de dinero","Un tour gratis"],correct:1},
-      {q:"¿Cómo evitar que el cliente diga 'te llamo después'?",opts:["No dejarlo hablar","Agendar día y hora específica","Ignorar el mensaje","Presionar mucho"],correct:1},
-      {q:"¿Cuál es la base de una buena venta?",opts:["Hablar rápido","Escucha activa de necesidades","Ofrecer lo más caro","Mentir un poco"],correct:1},
-      {q:"¿Qué incluye el 'valor' de una excursión?",opts:["Solo el transporte","Transporte, guía, equipo, seguros","Solo la comida","Nada, es solo dinero"],correct:1},
-      {q:"¿Por qué es importante mantener clientes satisfechos?",opts:["Obligación de la empresa","Vuelven y recomiendan = dinero futuro","Es aburrido","No importa"],correct:1},
-      {q:"Ante 'necesito pensarlo', ¿cuál es tu respuesta?",opts:["Está bien, vuelve cuando quieras","Te entiendo, ¿qué dudas tenés? + agenda follow-up","Ya es tarde, ya no hay lugar","Eso significa que no querés"],correct:1},
-      {q:"¿Cómo se compone tu ingreso en Patagonia?",opts:["Solo fijo","Solo comisión","Comisión + bonos + referidos","No hay ingresos"],correct:2},
-      {q:"¿Qué no debes hacer al cerrar?",opts:["Resumir beneficios","Presionar agresivamente","Generar confianza","Ser profesional"],correct:1},
-      {q:"¿Cuál es el testimonio más poderoso?",opts:["Del vendedor","De clientes satisfechos","De la web","No importa"],correct:1},
-      {q:"¿Cómo certificas una venta?",opts:["De palabra","Con comprobante y datos exactos","Solo en WhatsApp","No importa"],correct:1},
-      {q:"¿Qué pasa si ofreces menos que el precio fijo?",opts:["Ganás más","Pierdes comisión","Necesitas código ADM","Está permitido"],correct:2},
-      {q:"¿El follow-up es importante?",opts:["No, una llamada es suficiente","Sí, contacta después si no respondió","Está prohibido","Solo con admin"],correct:1},
-      {q:"¿Cuándo preguntas '¿Confirmo tu reserva?'?",opts:["Al inicio","En medio de la venta","Cuando está convencido","Nunca"],correct:2},
-      {q:"¿Qué genera una buena reputación?",opts:["Mentir","Exagerar beneficios","Cumplir y sobrepasar expectativas","Ignorar al cliente"],correct:2},
-      {q:"¿Cuál es tu mayor herramienta de venta?",opts:["El precio más bajo","La confianza y la escucha activa","El descuento","La presión"],correct:1}
-    ]
-  }
-];
-
-// Quitar los tabs y content antiguo
-const tabsOld = `
     tabs:[
       {label:'🎬 Video del Módulo', id:'t30'},
       {label:'🧾 Carga de Vouchers', id:'t31'},
@@ -617,6 +550,7 @@ const tabsOld = `
       {q:"¿Cuándo se puede aplicar un descuento sin código de autorización?",opts:["Cuando el cliente lo pide","Monto menor a $5.000","SP lo aprueba verbalmente","Nunca — siempre se necesita código de ADM"],correct:3}
     ]
   }
+];
 
 // ============ STATE ============
 let state = {
@@ -682,25 +616,26 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
   const pass = document.getElementById('loginPass').value.trim();
   
   if(!user || !pass) {
-    toast('❌ Completá usuario y contraseña');
+    toast('Completá usuario y contraseña');
     return;
   }
   
+  // Verificar credenciales
   const foundUser = findUserByCredentials(user, pass);
-  
   if(!foundUser) {
     toast('❌ Usuario o contraseña incorrectos');
     document.getElementById('loginPass').value = '';
     return;
   }
   
-  // Si es admin, ir al panel de login de admin
+  // Si es admin, ir al panel
   if(foundUser.role === 'admin') {
-    // Mostrar pantalla de login admin
-    showScreen('s-admin-login');
-    document.getElementById('loginUser').value = '';
-    document.getElementById('loginPass').value = '';
-    toast('Ingresá nuevamente con credenciales de admin', '');
+    state.role = 'admin';
+    state.name = foundUser.name;
+    document.getElementById('abadge').textContent = '🔐 Admin';
+    renderAdminPanel();
+    showScreen('s-admin');
+    toast('✓ Acceso administrativo concedido 🔐', 'success');
     return;
   }
   
@@ -808,14 +743,15 @@ function selectCustomTab(tabId){
   event.target.classList.add('active');
   
   const contentDiv = document.getElementById('modcontent');
-  contentDiv.innerHTML = `<div class="scard">${content}
-    <button class="btn-complete ${state.completed[m.id + '_' + tabId]?'completed':''}" onclick="completeCustomTab(${m.id},'${tabId}',this)" ${state.completed[m.id + '_' + tabId]?'disabled':''} style="background:#0f2d4a;color:#fff;padding:.75rem 1.5rem;border-radius:10px;border:none;cursor:pointer;margin-top:1rem">
-      ${state.completed[m.id + '_' + tabId]?'✓ Completada':'Marcar como completada'}
-    </button>
-  </div>`;
+  contentDiv.innerHTML = `<div class="scard">${content}</div>`;
   
+  // Si es el tab del juego, inicializarlo
+  if(tabId === 't25') {
+    setTimeout(() => initExcursionGame(), 100);
+  }
+  
+  // Reinicializar lucide icons si existen
   if(window.lucide) lucide.createIcons();
-}
 
 // ============ EXCURSION CLASSIFICATION GAME ============
 const excursionGameData = {
@@ -842,7 +778,7 @@ const excursionGameData = {
 };
 
 let gameState = {
-  answers: {},
+  placed: {},
   correct: 0,
   total: 0,
   gameActive: false
@@ -852,121 +788,144 @@ function initExcursionGame() {
   const gameDiv = document.getElementById('game-excursiones');
   if (!gameDiv) return;
   
-  gameState = { answers: {}, correct: 0, total: 0, gameActive: true };
+  gameState = { placed: {}, correct: 0, total: 0, gameActive: true };
+  
+  const poolExcursions = [...excursionGameData.excursions].sort(() => Math.random() - 0.5);
   
   let html = `
     <div class="game-title">🎮 Clasificá las Excursiones</div>
-    <div class="game-sub">Selecciona la categoría correcta para cada excursión. ¡Acertá todas para ganar!</div>
+    <div class="game-sub">Arrastrá cada excursión a la categoría correcta. ¡Acertá todas para ganar!</div>
     
-    <div style="margin-top:1.5rem">`;
+    <div class="game-board" id="game-categories">`;
   
-  excursionGameData.excursions.forEach((exc, i) => {
+  excursionGameData.categories.forEach(cat => {
     html += `
-      <div class="game-item" style="background:#f5f9fc;border-radius:12px;padding:1rem;margin-bottom:1rem;border-left:4px solid #0f2d4a">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
-          <div style="flex:1;min-width:150px">
-            <strong style="color:#0f2d4a;font-size:1rem">${exc.name}</strong>
-          </div>
-          <div style="display:flex;gap:.5rem;flex-wrap:wrap" id="options-${i}">
-            ${excursionGameData.categories.map((cat, catIdx) => `
-              <button class="game-option-btn" onclick="selectCategory('${exc.name}', '${cat.id}', this)" 
-                      data-excursion="${exc.name}" data-category="${cat.id}" data-correct="${exc.category}"
-                      style="padding:.5rem 1rem;border-radius:8px;border:2px solid #d0e5f2;background:#fff;color:#0f2d4a;cursor:pointer;font-size:.85rem;font-weight:500;transition:all .2s">
-                ${cat.name}
-              </button>
-            `).join('')}
-          </div>
-        </div>
+      <div class="game-col" data-category="${cat.id}" ondrop="dropExcursion(event)" ondragover="dragOver(event)">
+        <h4>${cat.name}</h4>
+        <div class="game-col-items" data-cat="${cat.id}"></div>
       </div>`;
   });
   
   html += `</div>
     
-    <div style="text-align:center;margin-top:1.5rem">
+    <div style="margin-bottom:1rem"><strong style="color:#0f2d4a">📌 Excursiones a clasificar:</strong></div>
+    <div class="game-pool" id="game-pool">`;
+  
+  poolExcursions.forEach((exc, i) => {
+    html += `
+      <div class="game-chip" draggable="true" data-excursion="${exc.name}" data-correct="${exc.category}" 
+           ondragstart="dragStart(event)" ondragend="dragEnd(event)" id="chip-${i}">
+        ${exc.name}
+      </div>`;
+  });
+  
+  html += `</div>
+    
+    <div style="text-align:center">
       <button class="btn-game" onclick="resetGame()">🔄 Reintentar</button>
       <button class="btn-game" style="background:#2ecc71" onclick="checkGameResult()" id="btn-check">✓ Verificar</button>
     </div>
     
-    <div class="game-score" id="game-score" style="display:none;margin-top:1.5rem">
+    <div class="game-score" id="game-score" style="display:none">
       <h3 id="game-result">¿Listo?</h3>
-      <p id="game-msg">Selecciona todas las categorías para ver tu resultado</p>
+      <p id="game-msg">Clasificá todas las excursiones para ver tu resultado</p>
     </div>`;
   
   gameDiv.innerHTML = html;
 }
 
-function selectCategory(excursionName, categoryId, btnElement) {
-  if(event) {
-    event.preventDefault();
-    event.stopPropagation();
+function dragStart(e) {
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', e.target.dataset.excursion);
+  e.dataTransfer.setData('correct-cat', e.target.dataset.correct);
+  e.target.classList.add('dragging');
+}
+
+function dragEnd(e) {
+  e.target.classList.remove('dragging');
+}
+
+function dragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.classList.add('over');
+}
+
+function dragLeave(e) {
+  if (e.currentTarget === e.target) {
+    e.currentTarget.classList.remove('over');
   }
+}
+
+function dropExcursion(e) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('over');
   
-  // Guardar la respuesta
-  gameState.answers[excursionName] = categoryId;
+  const excName = e.dataTransfer.getData('text/plain');
+  const correctCat = e.dataTransfer.getData('correct-cat');
+  const targetCat = e.currentTarget.dataset.category;
   
-  // Remover clase 'selected' de todos los botones de esta excursión
-  const allBtnsForExc = document.querySelectorAll(`[data-excursion="${excursionName}"]`);
-  allBtnsForExc.forEach(btn => {
-    btn.classList.remove('selected');
-    btn.style.background = '#fff';
-    btn.style.color = '#0f2d4a';
-    btn.style.borderColor = '#d0e5f2';
-  });
+  const itemsContainer = e.currentTarget.querySelector('.game-col-items');
+  const chip = document.querySelector(`[data-excursion="${excName}"]`);
   
-  // Agregar clase 'selected' al botón clickeado
-  btnElement.classList.add('selected');
-  btnElement.style.background = '#0f2d4a';
-  btnElement.style.color = '#fff';
-  btnElement.style.borderColor = '#0f2d4a';
+  if (!chip) return;
   
-  console.log('Seleccionaste:', excursionName, '→', categoryId);
+  // Crear chip en la columna
+  const chipClone = document.createElement('div');
+  chipClone.className = 'game-chip placed';
+  chipClone.textContent = excName;
+  chipClone.dataset.excursion = excName;
+  chipClone.dataset.category = targetCat;
+  chipClone.dataset.correct = correctCat;
+  chipClone.id = 'placed-' + excName.replace(/\s/g, '-');
+  chipClone.style.cursor = 'default';
+  
+  itemsContainer.appendChild(chipClone);
+  gameState.placed[excName] = targetCat;
+  
+  // Ocultar original
+  chip.style.opacity = '0.4';
+  chip.style.pointerEvents = 'none';
 }
 
 function checkGameResult() {
-  const answered = Object.keys(gameState.answers).length;
-  const total = excursionGameData.excursions.length;
+  const placed = Object.keys(gameState.placed);
+  const excursions = excursionGameData.excursions;
   
-  if (answered === 0) {
-    toast('¡Selecciona al menos una categoría!');
-    return;
-  }
-  
-  if (answered < total) {
-    toast(`Falta clasificar ${total - answered} excursión(es)`);
+  if (placed.length === 0) {
+    toast('¡Clasificá al menos una excursión!');
     return;
   }
   
   let correct = 0;
+  const feedback = [];
   
   // Verificar respuestas
-  excursionGameData.excursions.forEach(exc => {
-    const userCat = gameState.answers[exc.name];
-    const allBtnsForExc = document.querySelectorAll(`[data-excursion="${exc.name}"]`);
+  excursions.forEach(exc => {
+    const userCat = gameState.placed[exc.name];
+    const chipEl = document.getElementById('placed-' + exc.name.replace(/\s/g, '-'));
     
-    if (userCat === exc.category) {
-      correct++;
-      allBtnsForExc.forEach(btn => {
-        if (btn.dataset.category === exc.category) {
-          btn.style.background = '#2ecc71';
-          btn.style.borderColor = '#1aaa55';
-          btn.style.color = '#fff';
+    if (userCat) {
+      if (userCat === exc.category) {
+        correct++;
+        if (chipEl) {
+          chipEl.classList.add('correct');
+          chipEl.classList.remove('placed');
         }
-      });
-    } else {
-      allBtnsForExc.forEach(btn => {
-        if (btn.dataset.category === userCat) {
-          btn.style.background = '#e74c3c';
-          btn.style.borderColor = '#c0392b';
-          btn.style.color = '#fff';
-        } else if (btn.dataset.category === exc.category) {
-          btn.style.background = '#2ecc71';
-          btn.style.borderColor = '#1aaa55';
-          btn.style.color = '#fff';
+        feedback.push(`✓ ${exc.name} en ${excursionGameData.categories.find(c => c.id === exc.category).name}`);
+      } else {
+        if (chipEl) {
+          chipEl.classList.add('wrong');
+          chipEl.classList.remove('placed');
         }
-      });
+        const wrongCat = excursionGameData.categories.find(c => c.id === userCat).name;
+        const rightCat = excursionGameData.categories.find(c => c.id === exc.category).name;
+        feedback.push(`✗ ${exc.name}: colocaste en ${wrongCat}, debía ser ${rightCat}`);
+      }
     }
   });
   
+  const total = placed.length;
   const pct = Math.round((correct / total) * 100);
   
   const scoreDiv = document.getElementById('game-score');
@@ -992,169 +951,20 @@ function checkGameResult() {
 }
 
 function resetGame() {
-  gameState = { answers: {}, correct: 0, total: 0, gameActive: true };
+  // Limpiar chips colocados
+  document.querySelectorAll('.game-col-items').forEach(col => col.innerHTML = '');
+  
+  // Restaurar chips en pool
+  document.querySelectorAll('.game-chip.dragging').forEach(chip => {
+    chip.style.opacity = '1';
+    chip.style.pointerEvents = 'auto';
+  });
+  
+  // Resetear estado
+  gameState = { placed: {}, correct: 0, total: 0, gameActive: true };
   document.getElementById('game-score').style.display = 'none';
   document.getElementById('btn-check').textContent = '✓ Verificar';
   document.getElementById('btn-check').disabled = false;
-  
-  document.querySelectorAll('.game-option-btn').forEach(btn => {
-    btn.classList.remove('selected');
-    btn.style.background = '#fff';
-    btn.style.color = '#0f2d4a';
-    btn.style.borderColor = '#d0e5f2';
-  });
-  
-  toast('¡Juego reiniciado! 🔄');
-}
-
-// ============ GAME EN QUIZ ============
-function initExcursionGameQuiz() {
-  const gameDiv = document.getElementById('game-quiz-embed');
-  if (!gameDiv) return;
-  
-  gameState = { answers: {}, correct: 0, total: 0, gameActive: true };
-  
-  let html = `
-    <div style="background:#fff;border-radius:16px;padding:1.5rem">
-      <div style="color:#0f2d4a;font-size:.95rem;font-weight:600;margin-bottom:1rem">Selecciona la categoría correcta para cada excursión:</div>
-      <div style="display:grid;gap:1rem;margin-bottom:1.5rem">`;
-  
-  excursionGameData.excursions.forEach((exc, i) => {
-    html += `
-      <div style="background:#f5f9fc;border-radius:10px;padding:1rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;border-left:4px solid #0f2d4a">
-        <strong style="color:#0f2d4a;flex:1;min-width:120px">${exc.name}</strong>
-        <div style="display:flex;gap:.4rem;flex-wrap:wrap" id="options-quiz-${i}">
-          ${excursionGameData.categories.map((cat, catIdx) => `
-            <button class="game-quiz-btn" onclick="selectCategoryQuiz('${exc.name}', '${cat.id}', this)" 
-                    data-excursion="${exc.name}" data-category="${cat.id}" data-correct="${exc.category}"
-                    style="padding:.4rem .75rem;border-radius:6px;border:1px solid #d0e5f2;background:#fff;color:#0f2d4a;cursor:pointer;font-size:.75rem;font-weight:500;transition:all .2s">
-              ${cat.id === 'aventura' ? '🏔️' : cat.id === 'lacustre' ? '🚢' : cat.id === 'invierno' ? '❄️' : '🦅'}
-            </button>
-          `).join('')}
-        </div>
-      </div>`;
-  });
-  
-  html += `</div>
-    <div style="text-align:center;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
-      <button class="btn-game" style="background:#0f2d4a;padding:.6rem 1.2rem;font-size:.85rem" onclick="resetGameQuiz()">🔄 Reintentar</button>
-      <button class="btn-game" style="background:#2ecc71;padding:.6rem 1.2rem;font-size:.85rem" onclick="checkGameResultQuiz()" id="btn-check-quiz">✓ Verificar</button>
-    </div>
-    
-    <div class="game-score" id="game-score-quiz" style="display:none;margin-top:1rem;background:linear-gradient(120deg,#0f2d4a,#1a4a6e);border-radius:12px;padding:1rem">
-      <h3 id="game-result-quiz" style="font-size:1.1rem;margin:0 0 .5rem 0">¿Listo?</h3>
-      <p id="game-msg-quiz" style="margin:0;font-size:.85rem;opacity:.8">Selecciona todas las categorías para ver tu resultado</p>
-    </div>`;
-  
-  gameDiv.innerHTML = html;
-}
-
-function selectCategoryQuiz(excursionName, categoryId, btnElement) {
-  if(event) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
-  
-  gameState.answers[excursionName] = categoryId;
-  
-  const allBtnsForExc = document.querySelectorAll(`[data-excursion="${excursionName}"]`);
-  allBtnsForExc.forEach(btn => {
-    btn.classList.remove('selected');
-    btn.style.background = '#fff';
-    btn.style.color = '#0f2d4a';
-    btn.style.borderColor = '#d0e5f2';
-  });
-  
-  btnElement.classList.add('selected');
-  btnElement.style.background = '#0f2d4a';
-  btnElement.style.color = '#fff';
-  btnElement.style.borderColor = '#0f2d4a';
-}
-
-function checkGameResultQuiz() {
-  const answered = Object.keys(gameState.answers).length;
-  const total = excursionGameData.excursions.length;
-  
-  if (answered < total) {
-    toast(`Falta clasificar ${total - answered} excursión(es)`);
-    return;
-  }
-  
-  let correct = 0;
-  excursionGameData.excursions.forEach(exc => {
-    const userCat = gameState.answers[exc.name];
-    const allBtnsForExc = document.querySelectorAll(`[data-excursion="${exc.name}"]`);
-    
-    if (userCat === exc.category) {
-      correct++;
-      allBtnsForExc.forEach(btn => {
-        if (btn.dataset.category === exc.category) {
-          btn.style.background = '#2ecc71';
-          btn.style.borderColor = '#1aaa55';
-          btn.style.color = '#fff';
-        }
-      });
-    } else {
-      allBtnsForExc.forEach(btn => {
-        if (btn.dataset.category === userCat) {
-          btn.style.background = '#e74c3c';
-          btn.style.borderColor = '#c0392b';
-          btn.style.color = '#fff';
-        } else if (btn.dataset.category === exc.category) {
-          btn.style.background = '#2ecc71';
-          btn.style.borderColor = '#1aaa55';
-          btn.style.color = '#fff';
-        }
-      });
-    }
-  });
-  
-  // Registrar la respuesta — marcar como respondida (el valor específico no importa para el juego)
-  state.quizAnswers[state.currentQuestion] = correct === total ? 1 : 0;
-  state.answered = true;
-  
-  const scoreDiv = document.getElementById('game-score-quiz');
-  const resultH3 = document.getElementById('game-result-quiz');
-  const msgP = document.getElementById('game-msg-quiz');
-  
-  if (correct === total) {
-    resultH3.textContent = '🏆 ¡Perfecto!';
-    msgP.textContent = `Clasificaste todas las ${total} excursiones correctamente.`;
-    toast('✓ ¡Juego completado!', 'success');
-  } else {
-    resultH3.textContent = '📚 Seguí practicando';
-    msgP.textContent = `Acertaste ${correct} de ${total}. Revisá las categorías.`;
-    toast('✗ Vuelve a intentar', '');
-  }
-  
-  scoreDiv.style.display = 'block';
-  const checkBtn = document.getElementById('btn-check-quiz');
-  if(checkBtn) checkBtn.style.display = 'none';
-  
-  // Mostrar botones de navegación inmediatamente
-  const btnNext = document.getElementById('bnext');
-  const btnFin = document.getElementById('bfin');
-  const btnSkip = document.getElementById('bskip');
-  
-  if(btnSkip) btnSkip.style.display = 'none';
-  if(state.currentQuestion < 19) {
-    if(btnNext) btnNext.style.display = 'block';
-  } else {
-    if(btnFin) btnFin.style.display = 'block';
-  }
-}
-
-function resetGameQuiz() {
-  gameState = { answers: {}, correct: 0, total: 0, gameActive: true };
-  document.getElementById('game-score-quiz').style.display = 'none';
-  document.getElementById('btn-check-quiz').disabled = false;
-  
-  document.querySelectorAll('.game-quiz-btn').forEach(btn => {
-    btn.classList.remove('selected');
-    btn.style.background = '#fff';
-    btn.style.color = '#0f2d4a';
-    btn.style.borderColor = '#d0e5f2';
-  });
   
   toast('¡Juego reiniciado! 🔄');
 }
@@ -1190,36 +1000,13 @@ function completeLesson(id, btn){
   console.log('Estado actualizado:', state);
 }
 
-function completeCustomTab(moduleId, tabId, btn){
-  const key = moduleId + '_' + tabId;
-  state.completed[key] = true;
-  btn.classList.add('completed');
-  btn.textContent = '✓ Completada';
-  btn.disabled = true;
-  saveProgress();
-  toast('¡Contenido completado! 🎯','success');
-  console.log('Tab completado:', key);
-}
-
 function startQuizSession(){
   const m = state.currentModule;
-  
-  // Para módulos con tabs (M2, M3), verificar que todos estén completados
-  if(m.tabs && m.content) {
-    const allTabsCompleted = m.tabs.every(tab => state.completed[m.id + '_' + tab.id]);
-    if(!allTabsCompleted) {
-      toast('Completá todos los contenidos primero 📖');
-      return;
-    }
-  } else {
-    // Para módulos con lecciones (M1), verificar lecciones
-    const allDone = m.lessons.every(l=>state.completed[l.id]);
-    if(!allDone){
-      toast('Completá todas las lecciones primero 📖');
-      return;
-    }
+  const allDone = m.lessons.every(l=>state.completed[l.id]);
+  if(!allDone){
+    toast('Completá todas las lecciones primero 📖');
+    return;
   }
-  
   if(state.quizScores[m.id]!==undefined){
     toast('Ya completaste este quiz con '+state.quizScores[m.id]+'%');
     return;
@@ -1264,14 +1051,6 @@ function renderQuizQuestion(){
   
   const optsDiv = document.getElementById('opts');
   optsDiv.innerHTML = '';
-  
-  // Si es pregunta del juego, renderizar el juego
-  if(q.isGame) {
-    optsDiv.innerHTML = '<div id="game-quiz-embed" style="grid-column:1/-1"></div>';
-    setTimeout(() => initExcursionGameQuiz(), 100);
-    return;
-  }
-  
   q.opts.forEach((opt, i)=>{
     const li = document.createElement('li');
     li.className = 'obtn';
@@ -1411,10 +1190,23 @@ function toast(msg, type){
   setTimeout(()=>t.classList.remove('show'),3500);
 }
 
-// ============ ADMIN USERS (SEGUNDA DEFINICIÓN - REMOVER) ============
-// Eliminada porque ya estaba definida al inicio del script
+// ============ ADMIN USERS ============
+let adminUsers = [
+  {id:1, name:'Admin System', user:'admin', pass:'12345', role:'admin', office:'Central', email:'admin@pb.com'},
+  {id:2, name:'Yamila López', user:'yamila.lopez', pass:'yamila123', role:'sp', office:'PB', email:'yamila@pb.com'},
+  {id:3, name:'María García', user:'maria.garcia', pass:'maria123', role:'vendedor', office:'PB', email:'maria@pb.com'},
+  {id:4, name:'Carlos Ruiz', user:'carlos.ruiz', pass:'carlos123', role:'vendedor', office:'TB1', email:'carlos@pb.com'},
+  {id:5, name:'Rocío Fernández', user:'rocio.fernandez', pass:'rocio123', role:'sp', office:'TB2', email:'rocio@pb.com'},
+  {id:6, name:'Demo User', user:'demo', pass:'demo123', role:'vendedor', office:'PB', email:'demo@pb.com'}
+];
+
+function findUserByCredentials(user, pass){
+  return adminUsers.find(u => u.user === user && u.pass === pass);
+}
 
 let adminResults = [];
+
+// ============ DATA SDK HANDLER ============
 const dataHandler = {
   onDataChanged(data) {
     adminResults = data;
@@ -1435,36 +1227,22 @@ const dataHandler = {
 })();
 
 function doAdminLogin(){
-  const user = document.getElementById('adUsername').value.trim();
-  const pass = document.getElementById('adPassword').value.trim();
-  
-  if(!user || !pass) {
-    toast('❌ Ingresá usuario y contraseña');
-    return;
-  }
-  
+  const user = document.getElementById('adUsername').value;
+  const pass = document.getElementById('adPassword').value;
   const foundUser = findUserByCredentials(user, pass);
-  
-  if(!foundUser) {
-    toast('❌ Credenciales inválidas');
+  if(foundUser && foundUser.role === 'admin'){
+    state.role = 'admin';
+    state.name = foundUser.name;
+    document.getElementById('abadge').textContent = '🔐 Admin';
+    renderAdminPanel();
+    document.getElementById('adUsername').value = '';
     document.getElementById('adPassword').value = '';
-    return;
-  }
-  
-  if(foundUser.role !== 'admin') {
-    toast('❌ Este usuario no es administrador');
+    showScreen('s-admin');
+    toast('✓ Acceso administrativo concedido 🔐', 'success');
+  } else {
+    toast('❌ Credenciales de admin inválidas');
     document.getElementById('adPassword').value = '';
-    return;
   }
-  
-  state.role = 'admin';
-  state.name = foundUser.name;
-  document.getElementById('abadge').textContent = '🔐 Admin';
-  renderAdminPanel();
-  document.getElementById('adUsername').value = '';
-  document.getElementById('adPassword').value = '';
-  showScreen('s-admin');
-  toast('✓ Acceso administrativo concedido 🔐', 'success');
 }
 
 function renderAdminPanel(){
@@ -1533,12 +1311,6 @@ function deleteUserProgress(){
   const userToDelete = document.getElementById('delUser').value;
   if(!userToDelete){
     toast('Selecciona un usuario');
-    return;
-  }
-  
-  // Proteger usuario demo de testeo
-  if(userToDelete === 'demo'){
-    toast('⚠️ No se puede borrar el progreso del usuario demo (protegido para testeo)', '');
     return;
   }
   
@@ -1716,5 +1488,5 @@ if (window.elementSdk) {
 }
 
 lucide.createIcons();</script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e6a569bf2603d5e',t:'MTc3NTI0MzA1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e6a57ec826d3d5e',t:'MTc3NTI0MzExMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
